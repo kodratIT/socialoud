@@ -14,6 +14,7 @@ RUN apt-get update \
         libwebp-dev \
         libxml2-dev \
         libzip-dev \
+        pkg-config \
         unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j2 bcmath curl exif gd intl mbstring mysqli opcache pdo_mysql soap xml zip \
