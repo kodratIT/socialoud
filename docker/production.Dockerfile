@@ -12,6 +12,7 @@ RUN apt-get update \
         libjpeg62-turbo-dev \
         libpng-dev \
         libwebp-dev \
+        libonig-dev \
         libxml2-dev \
         libzip-dev \
         pkg-config \
