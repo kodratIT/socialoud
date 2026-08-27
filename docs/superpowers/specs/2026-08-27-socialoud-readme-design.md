@@ -13,12 +13,14 @@ The README serves both repository visitors and developers maintaining a local in
 - Project title and concise description.
 - Feature overview based on the current plugin structure: blog/content, gallery, ads, analytics, comments, multilingual support, RSS, contact, cookie consent, backups, audit/request logs, Google Reviews, and sliders.
 - Verified technology requirements: PHP 8.3/8.4, Laravel 13, Vue 3, Bootstrap 5, Laravel Mix, Composer, and npm.
-- Prerequisites and installation using the existing `composer setup` script.
+- Prerequisites: PHP extensions required by `composer.json` (`curl`, `gd`, `json`, `pdo`, and `zip`), a configured database supported by the Laravel configuration, and Node.js/npm.
+- Installation instructions that copy and configure `.env.example` before running migrations; explain that `composer setup` runs the full install/build sequence and therefore requires database settings first.
 - Manual setup commands for developers who need to control each step.
+- Explicit local run commands using `php artisan serve` and the available npm development script.
 - Development and production asset commands from `package.json`.
-- Testing and useful Artisan commands.
+- Testing commands and useful Artisan commands that are verified against the project configuration.
 - High-level repository structure.
-- Security/configuration notes: copy `.env.example`, keep secrets out of git, and configure the database and external services before deployment.
+- Security/configuration notes: keep secrets out of git and configure the database and external services before deployment.
 - MIT license statement matching `composer.json` metadata.
 
 ## Approach
@@ -27,4 +29,4 @@ Use one self-contained Markdown file with a short overview first and operational
 
 ## Verification
 
-After writing the README, verify the documented commands against `composer.json` and `package.json`, inspect the resulting diff, commit the README, and push the commit to `origin/main`.
+After writing the README, verify every documented command against `composer.json`, `package.json`, and the Laravel project configuration; inspect the resulting diff and run only the smallest applicable command checks. Git commit/push is the implementation delivery step, not a README content requirement.
