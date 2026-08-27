@@ -90,13 +90,13 @@
 
 @if (is_plugin_active('fob-comment'))
     @php
-        Theme::asset()->container('footer')->add('fob-comment-js', asset('vendor/core/plugins/fob-comment/js/comment.js'), ['jquery'], version: '1.2.6');
+        Theme::asset()->container('footer')->add('fob-comment-js', asset('vendor/core/plugins/fob-comment/js/comment.js'), ['jquery'], version: '1.2.8');
     @endphp
 @endif
 
+{!! Theme::footer() !!}
 <div id="fb-root"></div>
 <div id="socialoud-runtime"></div>
 <script src="{{ Theme::asset()->url('js/socialoud.js') }}?v={{ filemtime(public_path('themes/socialoud/js/socialoud.js')) }}"></script>
-{!! Theme::footer() !!}
 </body>
 </html>

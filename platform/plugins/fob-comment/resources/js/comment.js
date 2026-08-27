@@ -222,7 +222,7 @@ const initializeComments = (jqueryOverride) => {
             form.find('.fob-comment-form-title span').text(currentTarget.data('reply-to'))
             form.find('.fob-comment-form-title .cancel-comment-reply-link').remove()
             form.find('.fob-comment-form-title').append(
-                `<a href="#" class="cancel-comment-reply-link" rel="nofollow">${currentTarget.data('cancel-reply')}</a`
+                `<a href="#" class="cancel-comment-reply-link" rel="nofollow">${currentTarget.data('cancel-reply')}</a>`
             )
             form.find('form').prop('action', currentTarget.prop('href'))
 
