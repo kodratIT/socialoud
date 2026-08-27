@@ -11,9 +11,9 @@ services:
             APP_DEBUG: 'false'
         expose:
             - '9000'
+        command: ['sh', '-c', 'php artisan optimize && exec php-fpm -F']
         volumes:
             - './storage:/var/www/html/storage'
-            - './bootstrap/cache:/var/www/html/bootstrap/cache'
             - './public/storage:/var/www/html/public/storage'
         networks:
             - sail
