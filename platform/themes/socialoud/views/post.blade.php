@@ -88,6 +88,16 @@
             <div class="socialoud-article-share">
                 <span>Bagikan:</span>
                 {!! Theme::renderSocialSharing($post->url, SeoHelper::getDescription(), $post->image) !!}
+                @php
+                    $threadsShareUrl = 'https://www.threads.net/intent/post?text=' . rawurlencode($post->name . ' ' . $post->url);
+                @endphp
+                <ul class="bb-social-sharing socialoud-threads-sharing">
+                    <li class="bb-social-sharing__item">
+                        <a href="{{ $threadsShareUrl }}" target="_blank" rel="noopener noreferrer" title="Bagikan ke Threads" aria-label="Bagikan ke Threads">
+                            <span class="socialoud-threads-icon" aria-hidden="true">@</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
             @if ($post->tags && $post->tags->isNotEmpty())

@@ -317,6 +317,14 @@ main { transition: opacity .2s ease, transform .2s ease; }
     letter-spacing: .4px;
     transform: translateX(-50%);
 }
+.socialoud-ad-modal-countdown {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    color: #858b8b;
+    font-size: 12px;
+    text-align: center;
+}
 .socialoud-ad-modal-creative img,
 .socialoud-ad-modal-creative iframe { display: block; width: auto; max-width: 100%; max-height: 560px; height: auto; margin: 0 auto; border-radius: 5px; }
 .socialoud-gallery-modal[hidden] { display: none; }
@@ -667,6 +675,14 @@ main { transition: opacity .2s ease, transform .2s ease; }
 .socialoud-related-posts { margin-top: 30px; border-top: 1px solid var(--socialoud-line); padding-top: 18px; }
 .socialoud-article-share { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; color: var(--socialoud-muted); font-size: 12px; font-weight: 700; }
 .socialoud-article-share > * { margin: 0; }
+.socialoud-threads-sharing .bb-social-sharing__item a {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.socialoud-threads-icon { font-size: 18px; font-weight: 700; line-height: 1; }
 .socialoud-article-tags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--socialoud-muted); font-size: 11px; }
 .socialoud-article-tags a { border: 1px solid var(--socialoud-line); border-radius: 999px; padding: 6px 10px; color: var(--socialoud-orange); }
 .socialoud-related-posts .socialoud-section-title { margin-bottom: 12px; }
