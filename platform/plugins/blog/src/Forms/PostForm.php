@@ -22,10 +22,12 @@ use Botble\Base\Forms\Fields\TextareaField;
 use Botble\Base\Forms\Fields\TextField;
 use Botble\Base\Forms\Fields\TreeCategoryField;
 use Botble\Base\Forms\FormAbstract;
+use Illuminate\Support\Facades\Auth;
 use Botble\Blog\Http\Requests\PostRequest;
 use Botble\Blog\Models\Category;
 use Botble\Blog\Models\Post;
 use Botble\Blog\Models\Tag;
+use Botble\Blog\Supports\PostStatusWorkflow;
 
 class PostForm extends FormAbstract
 {
@@ -42,7 +44,7 @@ class PostForm extends FormAbstract
                 IsFeaturedFieldOption::make()
             )
             ->add('content', EditorField::class, ContentFieldOption::make()->allowedShortcodes())
-            ->add('status', SelectField::class, StatusFieldOption::make())
+            ->add('status', SelectField::class, StatusFieldOption::make()->choices(PostStatusWorkflow::choices(Auth::user())))
             ->add(
                 'author_id',
                 SelectField::class,

@@ -7,6 +7,7 @@ use Botble\Base\Rules\MediaImageRule;
 use Botble\Base\Rules\OnOffRule;
 use Botble\Blog\Models\Category;
 use Botble\Blog\Supports\PostFormat;
+use Botble\Blog\Supports\PostStatusWorkflow;
 use Botble\Support\Http\Requests\Request;
 use Illuminate\Validation\Rule;
 
@@ -21,7 +22,7 @@ class PostRequest extends Request
             'tag' => ['nullable', 'string', 'max:400'],
             'categories' => ['sometimes', 'array'],
             'categories.*' => ['sometimes', Rule::exists((new Category())->getTable(), 'id')],
-            'status' => Rule::in(BaseStatusEnum::values()),
+            'status' => Rule::in(PostStatusWorkflow::allowedValues($this->user())),
             'is_featured' => [new OnOffRule()],
             'image' => ['nullable', 'string', new MediaImageRule()],
         ];

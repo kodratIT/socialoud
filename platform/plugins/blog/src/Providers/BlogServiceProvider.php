@@ -137,6 +137,7 @@ class BlogServiceProvider extends ServiceProvider
                         ->name('plugins/blog::reports.name')
                         ->icon('ti ti-chart-bar')
                         ->route('blog.reports.index')
+                        ->permission('blog.reports')
                 );
         });
 

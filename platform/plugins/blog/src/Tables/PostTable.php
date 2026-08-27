@@ -6,6 +6,7 @@ use Botble\Base\Facades\Html;
 use Botble\Base\Models\BaseQueryBuilder;
 use Botble\Blog\Models\Category;
 use Botble\Blog\Models\Post;
+use Botble\Blog\Supports\PostStatusWorkflow;
 use Botble\Table\Abstracts\TableAbstract;
 use Botble\Table\Actions\DeleteAction;
 use Botble\Table\Actions\EditAction;
@@ -96,7 +97,7 @@ class PostTable extends TableAbstract
             ])
             ->addBulkChanges([
                 NameBulkChange::make(),
-                StatusBulkChange::make(),
+                StatusBulkChange::make()->choices(PostStatusWorkflow::choices(auth()->user())),
                 CreatedAtBulkChange::make(),
                 SelectBulkChange::make()
                     ->name('category')
