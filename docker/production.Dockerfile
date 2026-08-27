@@ -1,12 +1,4 @@
-FROM node:22-bookworm-slim AS assets
-
-WORKDIR /build
-COPY package.json package-lock.json ./
-RUN npm ci --ignore-scripts --no-audit --no-fund
-COPY . .
-RUN NODE_OPTIONS=--max-old-space-size=384 npm run production
-
-FROM php:8.4-fpm-bookworm AS app
+FROM php:8.4-fpm-bookworm AS php-base
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/tmp/composer \
@@ -31,18 +23,29 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 COPY . .
-COPY --from=assets /build/public /var/www/html/public
 RUN rm -rf vendor node_modules \
     && composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader --no-scripts \
     && php artisan package:discover --ansi \
     && php artisan cms:publish:assets \
-    && test -d public/vendor \
-    && test -d public/themes \
     && mkdir -p storage/app/public storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
 
+FROM node:22-bookworm-slim AS assets
+
+WORKDIR /build
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts --no-audit --no-fund
+COPY . .
+COPY --from=php-base /var/www/html/public/vendor /build/public/vendor
+RUN NODE_OPTIONS=--max-old-space-size=384 npm run production
+
+FROM php-base AS app
+
+COPY --from=assets /build/public /var/www/html/public
 COPY docker/php-fpm/php.ini /usr/local/etc/php/conf.d/zz-production.ini
 COPY docker/php-fpm/www.conf /usr/local/etc/php-fpm.d/zz-production.conf
+RUN test -d public/vendor \
+    && test -d public/themes
 
 CMD ["php-fpm", "-F"]
 
