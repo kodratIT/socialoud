@@ -12,7 +12,7 @@ export default defineComponent({
         PluginDetails,
         Pagination,
     },
-
+ 
     props: {
         pluginListUrl: {
             type: String,
