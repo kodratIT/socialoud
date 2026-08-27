@@ -11,17 +11,18 @@ The README serves both repository visitors and developers maintaining a local in
 ## Content
 
 - Project title and concise description.
-- Feature overview based on the current plugin structure: blog/content, gallery, ads, analytics, comments, multilingual support, RSS, contact, cookie consent, backups, audit/request logs, Google Reviews, and sliders.
-- Verified technology requirements: PHP 8.3/8.4, Laravel 13, Vue 3, Bootstrap 5, Laravel Mix, Composer, and npm.
-- Prerequisites: PHP extensions required by `composer.json` (`curl`, `gd`, `json`, `pdo`, and `zip`), a configured database supported by the Laravel configuration, and Node.js/npm.
-- Installation instructions that copy and configure `.env.example` before running migrations; explain that `composer setup` runs the full install/build sequence and therefore requires database settings first.
+- Bundled optional plugins, clearly described as requiring activation/configuration: `blog` (posts/categories/tags), `gallery`, `ads`, `analytics` (Google Analytics), `fob-comment` (visitor comments), `language`, `language-advanced`, `translation`, `rss-feed`, `contact`, `cookie-consent`, `backup` (database/uploads restore), `audit-log`, `request-log`, `fob-google-reviews`, `simple-slider`, `author`, `captcha`, and `note`. Also document `zarinpal` as an optional payment integration that requires the external `botble/payment` dependency and its own provider configuration; it is not bundled in this tree.
+- Verified technology requirements: the project declares a PHP 8.x runtime beginning at 8.3, Laravel 13, Vue 3, Bootstrap 5, Laravel Mix, Composer, and npm.
+- Prerequisites: PHP extensions declared by `composer.json` (`curl`, `gd`, `json`, `pdo`, and `zip`), plus the PDO driver for the selected database (`pdo_mysql` for the `.env.example` MySQL default); current locked frontend dependencies require Node.js 20 or >=22.
+- Installation instructions that create/select a database and copy/configure `.env.example` before running migrations; explain that `composer setup` runs `migrate --force`, `npm install`, and the production asset build.
 - Manual setup commands for developers who need to control each step.
-- Explicit local run commands using `php artisan serve` and the available npm development script.
-- Development and production asset commands from `package.json`.
-- Testing commands and useful Artisan commands that are verified against the project configuration.
+- Explicit local run commands: `php artisan serve` and `npm run dev` (or `npm run development`) in separate terminals.
+- Development, watch, and production asset commands from `package.json`.
+- Explicit test commands: `php artisan test` and `vendor/bin/phpunit`; note that tests use the Laravel/PHPUnit configuration and may require a test database.
+- Useful verified Artisan commands such as `php artisan about`, `php artisan route:list`, `php artisan storage:link`, and `php artisan config:clear`.
 - High-level repository structure.
-- Security/configuration notes: keep secrets out of git and configure the database and external services before deployment.
-- MIT license statement matching `composer.json` metadata.
+- Security/configuration notes: keep `.env` secrets out of git, use a fresh `APP_KEY` generated for the installation, set `APP_ENV`/`APP_DEBUG` safely, and configure the database and external services before deployment.
+- License section that reports the `MIT` metadata in `composer.json` without claiming a root `LICENSE` file exists.
 
 ## Approach
 
