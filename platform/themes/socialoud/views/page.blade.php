@@ -251,6 +251,9 @@
                                 @foreach ($popularPosts as $post)
                                     <a href="{{ $post->url }}" class="socialoud-rank-row">
                                         <span>{{ $loop->iteration }}</span>
+                                        <span class="socialoud-rank-thumb">
+                                            {!! RvMedia::image($post->image, $post->name, 'thumb') !!}
+                                        </span>
                                         <strong>{!! BaseHelper::clean($post->name) !!}</strong>
                                     </a>
                                 @endforeach

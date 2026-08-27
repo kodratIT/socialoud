@@ -1,8 +1,8 @@
 @php
-    Theme::asset()->add('fob-comment-css', asset('vendor/core/plugins/fob-comment/css/comment.css'), version: '1.2.3');
+    Theme::asset()->add('fob-comment-css', asset('vendor/core/plugins/fob-comment/css/comment.css'), version: '1.2.6');
     Theme::asset()
         ->container('footer')
-        ->add('fob-comment-js', asset('vendor/core/plugins/fob-comment/js/comment.js'), ['jquery'], version: '1.2.3');
+        ->add('fob-comment-js', asset('vendor/core/plugins/fob-comment/js/comment.js'), ['jquery'], version: '1.2.6');
 
     Theme::registerToastNotification();
 
@@ -10,6 +10,7 @@
 
     $fobPrimaryColor = setting('fob_comment_primary_color');
     $fobPrimaryColorHover = setting('fob_comment_primary_color_hover');
+    $fobCommentListUrl = route('fob-comment.public.comments.index', isset($model) ? ['reference_type' => $model::class, 'reference_id' => $model->id] : url()->current());
 @endphp
 
 @if ($fobPrimaryColor || $fobPrimaryColorHover)
@@ -27,12 +28,12 @@
 
 <script>
     window.fobComment = {
-        listUrl: {{ Js::from(route('fob-comment.public.comments.index', isset($model) ? ['reference_type' => $model::class, 'reference_id' => $model->id] : url()->current())) }},
+        listUrl: {{ Js::from($fobCommentListUrl) }},
         csrfToken: {{ Js::from(csrf_token()) }},
     };
 </script>
 
-<div class="fob-comment-list-section">
+<div class="fob-comment-list-section" data-fob-comment-list-url="{{ $fobCommentListUrl }}">
     <div class="fob-comment-list-loading">
         <div class="fob-comment-skeleton-title"></div>
         @for ($i = 0; $i < 2; $i++)

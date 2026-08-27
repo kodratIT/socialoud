@@ -1,12 +1,19 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Wait for jQuery to be available
-    if (typeof $ === 'undefined' && typeof jQuery === 'undefined') {
-        console.error('fob-comment: jQuery is required')
+const resolveJquery = (candidate) => {
+    if (typeof candidate === 'function') return candidate
+    if (typeof candidate?.default === 'function') return candidate.default
+    if (candidate?.constructor?.fn && typeof candidate.constructor === 'function') return candidate.constructor
+    return null
+}
+
+const initializeComments = (jqueryOverride) => {
+    const $ = [jqueryOverride, window.socialoudJquery, window.jQuery, window.$]
+        .map(resolveJquery)
+        .find(Boolean)
+    if (!$) {
+        window.addEventListener('socialoud:runtime-ready', (event) => initializeComments(event.detail?.jquery), { once: true })
         return
     }
-
-    const $ = window.jQuery || window.$
-
+    window.__fobCommentReady = true
     let isReplying = false
     let originalForm = ''
 
@@ -46,8 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
 
-    const fetchComments = (url = fobComment.listUrl) => {
+    const fetchComments = (url = window.fobComment?.listUrl) => {
         const $commentListSection = $(document).find('.fob-comment-list-section')
+        if (!$commentListSection.length || !url) return
         const $loading = $commentListSection.find('.fob-comment-list-loading')
         const $content = $commentListSection.find('.fob-comment-list-content')
 
@@ -269,4 +277,14 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 
     fetchComments()
-})
+    window.addEventListener('socialoud:page-updated', () => {
+        const listUrl = document.querySelector('.fob-comment-list-section')?.dataset.fobCommentListUrl
+        if (listUrl) fetchComments(listUrl)
+    })
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeComments)
+} else {
+    initializeComments()
+}

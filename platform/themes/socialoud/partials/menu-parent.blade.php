@@ -10,4 +10,9 @@
             </a>
         </li>
     @endforeach
+    @if (\Illuminate\Support\Facades\Route::has('public.galleries'))
+        <li @class(['socialoud-gallery-menu-item', 'current' => request()->routeIs('public.galleries')])>
+            <a href="{{ route('public.galleries') }}"><span>Gallery</span></a>
+        </li>
+    @endif
 </ul>

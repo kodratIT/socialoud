@@ -1,7 +1,22 @@
 import { createApp } from 'vue';
+import jquery from 'jquery';
+const jqueryFactory = typeof jquery === 'function' ? jquery : jquery?.default;
+const jqueryInstance = jqueryFactory || (typeof window.jQuery === 'function' ? window.jQuery : typeof window.$ === 'function' ? window.$ : null);
+const notifyRuntimeReady = () => {
+    window.dispatchEvent(new CustomEvent('socialoud:runtime-ready', { detail: { jquery: jqueryInstance } }));
+};
+if (jqueryInstance) {
+    window.socialoudJquery = jqueryInstance;
+    window.jQuery = window.$ = jqueryInstance;
+}
+notifyRuntimeReady();
+window.setTimeout(notifyRuntimeReady, 0);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', notifyRuntimeReady, { once: true });
+}
 
 const SocialoudRuntime = {
-    template: '<span aria-hidden="true"></span>',
+    render: () => null,
 
     data() {
         return {
@@ -15,15 +30,28 @@ const SocialoudRuntime = {
 
     mounted() {
         this.onDocumentClick = this.handleDocumentClick.bind(this);
+        this.onDocumentChange = this.handleDocumentChange.bind(this);
         this.onDocumentSubmit = this.handleDocumentSubmit.bind(this);
         this.onPopState = () => this.navigate(window.location.href, false);
         this.onKeydown = (event) => {
-            if (event.key === 'Escape') this.closeCoverAd();
+            if (event.key === 'Escape') {
+                this.closeGalleryPreview();
+                this.closeCoverAd();
+            }
         };
+        this.colorSchemeMedia = window.matchMedia('(prefers-color-scheme: light)');
+        this.onColorSchemeChange = () => {
+            if (this.getThemePreference() === 'auto') this.setTheme('auto', false);
+        };
+        if (this.colorSchemeMedia.addEventListener) {
+            this.colorSchemeMedia.addEventListener('change', this.onColorSchemeChange);
+        } else {
+            this.colorSchemeMedia.addListener(this.onColorSchemeChange);
+        }
 
         document.addEventListener('click', this.onDocumentClick);
+        document.addEventListener('change', this.onDocumentChange);
         document.addEventListener('submit', this.onDocumentSubmit);
-        document.addEventListener('keydown', this.onKeydown);
         window.addEventListener('popstate', this.onPopState);
         this.applyStoredTheme();
         this.bindPage();
@@ -32,9 +60,14 @@ const SocialoudRuntime = {
 
     beforeUnmount() {
         document.removeEventListener('click', this.onDocumentClick);
+        document.removeEventListener('change', this.onDocumentChange);
         document.removeEventListener('submit', this.onDocumentSubmit);
-        document.removeEventListener('keydown', this.onKeydown);
         window.removeEventListener('popstate', this.onPopState);
+        if (this.colorSchemeMedia?.removeEventListener) {
+            this.colorSchemeMedia.removeEventListener('change', this.onColorSchemeChange);
+        } else {
+            this.colorSchemeMedia?.removeListener(this.onColorSchemeChange);
+        }
         window.clearTimeout(this.modalTimer);
         window.clearInterval(this.modalCountdownTimer);
         this.adSliderTimers.forEach(({ timer }) => window.clearInterval(timer));
@@ -44,30 +77,44 @@ const SocialoudRuntime = {
         bindPage() {
             this.updateSubcategoryArrows();
             this.bindAdSliders();
+            this.bindGalleryModal();
         },
+        bindGalleryModal() {
+            const modals = [...document.querySelectorAll('[data-socialoud-gallery-modal]')];
+            const modal = modals.pop();
+            modals.forEach((item) => item.remove());
+            if (modal && modal.parentNode !== document.body) document.body.appendChild(modal);
+        },
+
+        getThemePreference() {
+            try {
+                const preference = localStorage.getItem('socialoud-theme');
+                return ['dark', 'light', 'auto'].includes(preference) ? preference : 'dark';
+            } catch (_) {
+                return 'dark';
+            }
+        },
+
         applyStoredTheme() {
-            this.setTheme(document.documentElement.classList.contains('socialoud-light') ? 'light' : 'dark', false);
+            this.setTheme(this.getThemePreference(), false);
         },
 
-        toggleTheme() {
-            this.setTheme(document.documentElement.classList.contains('socialoud-light') ? 'dark' : 'light');
-        },
+        setTheme(preference, persist = true) {
 
-        setTheme(theme, persist = true) {
-            const isLight = theme === 'light';
+            const theme = ['dark', 'light', 'auto'].includes(preference) ? preference : 'dark';
+            const isLight = theme === 'light' || (theme === 'auto' && this.colorSchemeMedia.matches);
             document.documentElement.classList.toggle('socialoud-light', isLight);
             if (persist) {
                 try {
-                    localStorage.setItem('socialoud-theme', isLight ? 'light' : 'dark');
+                    localStorage.setItem('socialoud-theme', theme);
                 } catch (_) {}
             }
 
-            const button = document.querySelector('[data-theme-toggle]');
-            if (!button) return;
-            button.setAttribute('aria-pressed', String(isLight));
-            button.setAttribute('aria-label', isLight ? 'Gunakan mode gelap' : 'Gunakan mode terang');
-            button.querySelector('.socialoud-theme-label').textContent = isLight ? 'DARK' : 'LIGHT';
-            button.querySelector('span').textContent = isLight ? '☾' : '☼';
+            const select = document.querySelector('[data-theme-toggle]');
+            if (!select) return;
+            select.value = theme;
+            const labels = { auto: 'Auto', dark: 'Dark', light: 'Light' };
+            select.setAttribute('aria-label', `Choose display theme (current: ${labels[theme]})`);
         },
 
         handleDocumentClick(event) {
@@ -89,9 +136,16 @@ const SocialoudRuntime = {
                 if (open) panel.querySelector('input')?.focus();
                 return;
             }
-            const themeButton = event.target.closest('[data-theme-toggle]');
-            if (themeButton) {
-                this.toggleTheme();
+            const galleryModalClose = event.target.closest('[data-socialoud-gallery-modal-close]');
+            if (galleryModalClose) {
+                this.closeGalleryPreview();
+                return;
+            }
+
+            const galleryPreview = event.target.closest('[data-socialoud-gallery-preview]');
+            if (galleryPreview) {
+                event.preventDefault();
+                this.openGalleryPreview(galleryPreview);
                 return;
             }
 
@@ -124,6 +178,12 @@ const SocialoudRuntime = {
                 return;
             }
 
+            const galleryLoadMore = event.target.closest('[data-socialoud-gallery-load-more]');
+            if (galleryLoadMore) {
+                this.loadMoreGallery(galleryLoadMore);
+                return;
+            }
+
             const loadMore = event.target.closest('[data-socialoud-load-more]');
             if (loadMore) {
                 this.loadMoreCategory(loadMore);
@@ -140,6 +200,10 @@ const SocialoudRuntime = {
 
             event.preventDefault();
             this.navigate(url.href);
+        },
+        handleDocumentChange(event) {
+            const select = event.target.closest('[data-theme-toggle]');
+            if (select) this.setTheme(select.value);
         },
 
         handleDocumentSubmit(event) {
@@ -179,8 +243,14 @@ const SocialoudRuntime = {
                 const html = await response.text();
                 const documentParser = new DOMParser();
                 const nextDocument = documentParser.parseFromString(html, 'text/html');
-                const nextMain = nextDocument.querySelector('main.socialoud-home, main.socialoud-category-page') || nextDocument.querySelector('main.socialoud-default-content');
+                const nextMain = nextDocument.querySelector('main.socialoud-article-page')
+                    || nextDocument.querySelector('main.socialoud-home, main.socialoud-category-page')
+                    || nextDocument.querySelector('main.socialoud-default-content');
                 const currentMain = document.querySelector('main.socialoud-home, main.socialoud-category-page') || document.querySelector('main.socialoud-default-content');
+                const existingStyles = new Set([...document.querySelectorAll('link[rel="stylesheet"][href]')].map((link) => link.href));
+                nextDocument.querySelectorAll('link[rel="stylesheet"][href]').forEach((link) => {
+                    if (!existingStyles.has(link.href)) document.head.appendChild(document.importNode(link, true));
+                });
                 if (!nextMain || !currentMain) {
                     window.location.href = url;
                     return;
@@ -194,6 +264,16 @@ const SocialoudRuntime = {
                 if (push) window.history.pushState({}, '', url);
                 window.scrollTo({ top: 0, behavior: 'auto' });
                 this.bindPage();
+                const commentListUrl = nextMainElement.querySelector('[data-fob-comment-list-url]')?.dataset.fobCommentListUrl;
+                const csrfToken = nextDocument.querySelector('meta[name="csrf-token"]')?.content;
+                if (commentListUrl) {
+                    window.fobComment = {
+                        ...(window.fobComment || {}),
+                        listUrl: commentListUrl,
+                        ...(csrfToken ? { csrfToken } : {}),
+                    };
+                }
+                window.dispatchEvent(new CustomEvent('socialoud:page-updated'));
             } catch (error) {
                 console.error(error);
                 window.location.href = url;
@@ -214,6 +294,33 @@ const SocialoudRuntime = {
                 const current = document.head.querySelector(`meta[property="${incoming.getAttribute('property')}"]`) || document.head.querySelector(`meta[name="${incoming.getAttribute('name')}"]`);
                 if (current) current.setAttribute('content', incoming.content);
             });
+        },
+
+
+        openGalleryPreview(link) {
+            const modal = document.querySelector('[data-socialoud-gallery-modal]');
+            const image = link.querySelector('img');
+            const previewImage = modal?.querySelector('[data-socialoud-gallery-preview-image]');
+            const previewTitle = modal?.querySelector('[data-socialoud-gallery-preview-title]');
+            const source = link.dataset.galleryImage || image?.currentSrc || image?.src;
+            if (!modal || !previewImage || !source) return;
+
+            previewImage.src = source;
+            previewImage.alt = link.dataset.galleryTitle || image.alt || '';
+            previewImage.hidden = false;
+            if (previewTitle) previewTitle.textContent = link.dataset.galleryTitle || image.alt || '';
+            modal.hidden = false;
+            document.body.classList.add('socialoud-modal-open');
+            modal.querySelector('.socialoud-gallery-modal-close')?.focus();
+        },
+
+        closeGalleryPreview() {
+            const modal = document.querySelector('[data-socialoud-gallery-modal]');
+            if (!modal || modal.hidden) return;
+            modal.hidden = true;
+            if (!document.querySelector('[data-socialoud-cover-ad]:not([hidden])')) {
+                document.body.classList.remove('socialoud-modal-open');
+            }
         },
 
         getCoverAdDay() {
@@ -430,6 +537,14 @@ const SocialoudRuntime = {
                 this.categoryLoading = false;
                 categoryList.setAttribute('aria-busy', 'false');
             }
+        },
+
+        loadMoreGallery(button) {
+            const hiddenCards = [...document.querySelectorAll('[data-socialoud-gallery-card][hidden]')];
+            hiddenCards.slice(0, 6).forEach((card) => {
+                card.hidden = false;
+            });
+            if (hiddenCards.length <= 6) button.remove();
         },
 
         updateLoadMore(data) {

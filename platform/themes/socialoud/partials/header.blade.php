@@ -5,9 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=1" name="viewport">
     {!! BaseHelper::googleFonts('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap') !!}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
         try {
-            if (localStorage.getItem('socialoud-theme') === 'light') document.documentElement.classList.add('socialoud-light');
+            const themePreference = localStorage.getItem('socialoud-theme');
+            const useLightTheme = themePreference === 'light'
+                || (themePreference === 'auto' && window.matchMedia('(prefers-color-scheme: light)').matches);
+            if (useLightTheme) document.documentElement.classList.add('socialoud-light');
         } catch (_) {}
     </script>
     <link rel="icon" type="image/png" href="{{ Theme::asset()->url('images/branding/socialoud-mark.png') }}">
@@ -46,10 +50,12 @@
                 <div class="socialoud-language">{!! apply_filters('language_switcher') !!}</div>
             @endif
             <button class="socialoud-search-toggle" type="button" aria-label="{{ __('Search') }}" aria-expanded="false">⌕</button>
-            <button class="socialoud-theme-toggle" type="button" data-theme-toggle aria-label="Ganti tema" aria-pressed="false">
-                <span aria-hidden="true">☼</span><span class="socialoud-theme-label">LIGHT</span>
-            </button>
-            <a href="{{ url('login') }}" class="socialoud-login">{{ __('Login') }}</a>
+            <label class="sr-only" for="socialoud-theme-select">Display theme</label>
+            <select id="socialoud-theme-select" class="socialoud-theme-select" data-theme-toggle aria-label="Choose display theme">
+                <option value="auto">Auto</option>
+                <option value="dark" selected>Dark</option>
+                <option value="light">Light</option>
+            </select>
         </div>
     </div>
     @if (is_plugin_active('blog'))
