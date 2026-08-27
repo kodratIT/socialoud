@@ -78,6 +78,18 @@ const SocialoudRuntime = {
             this.updateSubcategoryArrows();
             this.bindAdSliders();
             this.bindGalleryModal();
+            this.bindThreadsShare();
+        },
+        bindThreadsShare() {
+            const sharing = document.querySelector('.socialoud-article-share');
+            const list = sharing?.querySelector('.bb-social-sharing:not(.socialoud-threads-sharing)');
+            const threadsItem = sharing?.querySelector('.socialoud-threads-sharing li');
+            const copyItem = list?.lastElementChild;
+            const threadsWrapper = threadsItem?.parentElement;
+            if (!list || !threadsItem || !copyItem || !threadsWrapper) return;
+
+            list.insertBefore(threadsItem, copyItem);
+            threadsWrapper.remove();
         },
         bindGalleryModal() {
             const modals = [...document.querySelectorAll('[data-socialoud-gallery-modal]')];
