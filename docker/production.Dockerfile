@@ -44,9 +44,9 @@ RUN set -eux; \
     for source in platform/plugins/* platform/packages/* platform/themes/*; do \
         [ -d "$source/public" ] || continue; \
         case "$source" in \
-            platform/plugins/*) target="public/vendor/core/plugins/${source##*/}" ;;
-            platform/packages/*) target="public/vendor/core/packages/${source##*/}" ;;
-            platform/themes/*) target="public/themes/${source##*/}" ;;
+            platform/plugins/*) target="public/vendor/core/plugins/${source##*/}" ;; \
+            platform/packages/*) target="public/vendor/core/packages/${source##*/}" ;; \
+            platform/themes/*) target="public/themes/${source##*/}" ;; \
         esac; \
         mkdir -p "$target"; \
         cp -a "$source/public/." "$target/"; \
