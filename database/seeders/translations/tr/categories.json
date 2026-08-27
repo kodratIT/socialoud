@@ -1,0 +1,17 @@
+{
+    "Discovery": {"name": "Ke\u015fif", "description": "Ke\u015fif kategorisi"},
+    "Hot & Cool": {"name": "S\u0131cak & Serin", "description": "S\u0131cak ve serin kategorisi"},
+    "Other sports": {"name": "Di\u011fer Sporlar", "description": "Di\u011fer sporlar kategorisi"},
+    "Video": {"name": "Video", "description": "Video kategorisi"},
+    "Football": {"name": "Futbol", "description": "Futbol kategorisi"},
+    "Sport": {"name": "Spor", "description": "Spor kategorisi"},
+    "Fashion": {"name": "Moda", "description": "Moda kategorisi"},
+    "Life": {"name": "Ya\u015fam", "description": "Ya\u015fam kategorisi"},
+    "Beautify": {"name": "G\u00fczelle\u015ftirme", "description": "G\u00fczelle\u015ftirme kategorisi"},
+    "Love": {"name": "A\u015fk", "description": "A\u015fk kategorisi"},
+    "Behind the scenes": {"name": "Kamera Arkas\u0131", "description": "Kamera arkas\u0131 kategorisi"},
+    "Economy": {"name": "Ekonomi", "description": "Ekonomi kategorisi"},
+    "Law": {"name": "Hukuk", "description": "Hukuk kategorisi"},
+    "Business": {"name": "\u0130\u015f D\u00fcnyas\u0131", "description": "\u0130\u015f d\u00fcnyas\u0131 kategorisi"},
+    "Entertainment": {"name": "E\u011flence", "description": "E\u011flence kategorisi"}
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Socialoud",
+    "namespace": "Theme\\Socialoud\\",
+    "description": "Socialoud frontend theme based on LaraMag.",
+    "author": "Custom",
+    "required_plugins": [
+        "blog",
+        "contact",
+        "gallery",
+        "language",
+        "simple-slider"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "Discovery": {"name": "D\u00e9couverte", "description": "Cat\u00e9gorie d\u00e9couverte"},
+    "Hot & Cool": {"name": "Chaud & Cool", "description": "Cat\u00e9gorie chaud et cool"},
+    "Other sports": {"name": "Autres sports", "description": "Cat\u00e9gorie autres sports"},
+    "Video": {"name": "Vid\u00e9o", "description": "Cat\u00e9gorie vid\u00e9o"},
+    "Football": {"name": "Football", "description": "Cat\u00e9gorie football"},
+    "Sport": {"name": "Sport", "description": "Cat\u00e9gorie sport"},
+    "Fashion": {"name": "Mode", "description": "Cat\u00e9gorie mode"},
+    "Life": {"name": "Vie", "description": "Cat\u00e9gorie vie"},
+    "Beautify": {"name": "Beaut\u00e9", "description": "Cat\u00e9gorie beaut\u00e9"},
+    "Love": {"name": "Amour", "description": "Cat\u00e9gorie amour"},
+    "Behind the scenes": {"name": "Coulisses", "description": "Cat\u00e9gorie coulisses"},
+    "Economy": {"name": "\u00c9conomie", "description": "Cat\u00e9gorie \u00e9conomie"},
+    "Law": {"name": "Droit", "description": "Cat\u00e9gorie droit"},
+    "Business": {"name": "Affaires", "description": "Cat\u00e9gorie affaires"},
+    "Entertainment": {"name": "Divertissement", "description": "Cat\u00e9gorie divertissement"}
+}

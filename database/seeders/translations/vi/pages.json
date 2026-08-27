@@ -1,0 +1,22 @@
+{
+    "Homepage": {
+        "name": "Trang chủ",
+        "content": "<div>[featured-posts limit=\"5\" enable_lazy_loading=\"yes\"][/featured-posts]</div><div>[simple-slider key=\"home-slider\" enable_lazy_loading=\"yes\"][/simple-slider]</div><div>[category-posts enable_lazy_loading=\"yes\"][/category-posts]</div><div>[all-galleries enable_lazy_loading=\"yes\"][/all-galleries]</div>"
+    },
+    "Introduction": {
+        "name": "Giới thiệu",
+        "content": "<p>Chào mừng bạn đến với nền tảng của chúng tôi, nơi chúng tôi mang đến cho bạn những tin tức, hiểu biết và câu chuyện mới nhất từ khắp nơi trên thế giới. Sứ mệnh của chúng tôi là cung cấp nội dung chất lượng cao giúp thông tin, truyền cảm hứng và thu hút độc giả. Chúng tôi cam kết với sự xuất sắc và chính trực trong báo chí.</p><p>Được thành lập bởi đội ngũ nhà báo và người sáng tạo nội dung giàu kinh nghiệm, chúng tôi đã xây dựng danh tiếng trong việc cung cấp các bài viết chính xác, cân bằng và sâu sắc trên nhiều chủ đề bao gồm công nghệ, kinh doanh, phong cách sống, văn hóa và nhiều hơn nữa.</p><p>Đội ngũ biên tập của chúng tôi làm việc không ngừng để đảm bảo mỗi nội dung đều đáp ứng tiêu chuẩn cao của chúng tôi. Chúng tôi tin vào sức mạnh của việc kể chuyện để tạo nên sự khác biệt trong cuộc sống con người và giúp họ hiểu rõ hơn về thế giới xung quanh.</p><p>Cảm ơn bạn đã là một phần của cộng đồng chúng tôi. Chúng tôi mong muốn tiếp tục phục vụ bạn với nội dung tốt nhất có thể.</p>"
+    },
+    "About us": {
+        "name": "Về chúng tôi",
+        "content": "<p>Chúng tôi là công ty truyền thông số hàng đầu, tận tâm cung cấp nội dung xuất sắc cho độc giả trên toàn thế giới. Với đội ngũ nhà văn, biên tập viên và người sáng tạo nội dung tài năng, chúng tôi đưa tin về những câu chuyện quan trọng nhất với bạn.</p><p>Nền tảng của chúng tôi có phân tích chuyên sâu, tin tức nóng hổi, ý kiến chuyên gia và nội dung đa phương tiện hấp dẫn. Chúng tôi tự hào về cam kết với sự chính xác, công bằng và minh bạch trong báo cáo.</p><p>Điều khiến chúng tôi khác biệt là tập trung vào chất lượng thay vì số lượng. Mỗi bài viết được nghiên cứu kỹ lưỡng, kiểm tra thực tế và biên tập để đảm bảo cung cấp thông tin đáng tin cậy nhất cho khán giả. Chúng tôi tin rằng độc giả được thông tin sẽ đưa ra quyết định tốt hơn, và chúng tôi nỗ lực trở thành nguồn thông tin đáng tin cậy của bạn.</p><p>Hãy cùng chúng tôi trên hành trình phát triển và đổi mới. Chúng tôi luôn tìm cách cải thiện và phục vụ cộng đồng tốt hơn. Phản hồi và sự ủng hộ của bạn là động lực giúp chúng tôi tốt hơn mỗi ngày.</p>"
+    },
+    "Contact": {
+        "name": "Liên hệ",
+        "content": "<p>123 Đường Chính, Quận Trung Tâm, Thành phố Metro, ST 12345</p><p>+1 (555) 123-4567 (4 đường dây) - +1 (555) 987-6543</p><p>+1 (555) 246-8135</p><p>contact@example.com&nbsp;&nbsp;</p><div>[contact-form][/contact-form]</div>"
+    },
+    "Cookie Consent": {
+        "name": "Chính sách Cookie",
+        "content": "<h3>Chấp thuận Cookie EU</h3><p>Để sử dụng trang web này, chúng tôi sử dụng Cookie và thu thập một số dữ liệu. Để tuân thủ GDPR của EU, chúng tôi cho phép bạn chọn có cho phép chúng tôi sử dụng một số Cookie và thu thập một số dữ liệu hay không.</p><h4>Dữ liệu thiết yếu</h4><p>Dữ liệu thiết yếu cần thiết để vận hành trang web bạn đang truy cập về mặt kỹ thuật. Bạn không thể tắt chúng.</p><p>- Cookie phiên: PHP sử dụng Cookie để xác định phiên người dùng. Không có Cookie này, trang web sẽ không hoạt động.</p><p>- Cookie XSRF-Token: Laravel tự động tạo \"mã thông báo\" CSRF cho mỗi phiên người dùng đang hoạt động được ứng dụng quản lý. Mã thông báo này được sử dụng để xác minh rằng người dùng đã xác thực là người thực sự đang gửi yêu cầu đến ứng dụng.</p>"
+    }
+}

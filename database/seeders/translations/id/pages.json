@@ -1,0 +1,22 @@
+{
+    "Homepage": {
+        "name": "Beranda",
+        "content": "<div>[featured-posts limit=\"5\" enable_lazy_loading=\"yes\"][/featured-posts]</div><div>[simple-slider key=\"home-slider\" enable_lazy_loading=\"yes\"][/simple-slider]</div><div>[category-posts enable_lazy_loading=\"yes\"][/category-posts]</div><div>[all-galleries enable_lazy_loading=\"yes\"][/all-galleries]</div>"
+    },
+    "Introduction": {
+        "name": "Pengantar",
+        "content": "<p>Selamat datang di platform kami, di mana kami menghadirkan berita terbaru, wawasan, dan cerita dari seluruh dunia. Misi kami adalah menyediakan konten berkualitas tinggi yang menginformasikan, menginspirasi, dan melibatkan pembaca kami. Kami berkomitmen pada keunggulan jurnalistik dan integritas dalam segala hal yang kami lakukan.</p><p>Didirikan oleh tim jurnalis dan pembuat konten berpengalaman, kami telah membangun reputasi dalam memberikan artikel yang akurat, seimbang, dan menggugah pikiran di berbagai topik termasuk teknologi, bisnis, gaya hidup, budaya, dan lainnya.</p><p>Tim editorial kami bekerja tanpa lelah untuk memastikan setiap konten memenuhi standar tinggi kami. Kami percaya pada kekuatan bercerita untuk membuat perbedaan dalam kehidupan orang dan membantu mereka memahami dunia di sekitar mereka dengan lebih baik.</p><p>Terima kasih telah menjadi bagian dari komunitas kami. Kami berharap dapat terus melayani Anda dengan konten terbaik yang mungkin.</p>"
+    },
+    "About us": {
+        "name": "Tentang Kami",
+        "content": "<p>Kami adalah perusahaan media digital terkemuka yang berdedikasi untuk memberikan konten luar biasa kepada pembaca kami di seluruh dunia. Dengan tim penulis, editor, dan pembuat konten berbakat, kami meliput cerita yang paling penting bagi Anda.</p><p>Platform kami menampilkan analisis mendalam, berita terkini, pendapat ahli, dan konten multimedia yang menarik. Kami bangga dengan komitmen kami terhadap akurasi, keadilan, dan transparansi dalam pelaporan kami.</p><p>Yang membedakan kami adalah fokus kami pada kualitas daripada kuantitas. Setiap artikel diteliti dengan cermat, diperiksa faktanya, dan diedit untuk memastikan kami memberikan informasi paling andal kepada audiens kami. Kami percaya bahwa pembaca yang terinformasi membuat keputusan yang lebih baik, dan kami berusaha menjadi sumber informasi terpercaya Anda.</p><p>Bergabunglah dengan kami dalam perjalanan kami saat kami terus tumbuh dan berkembang. Kami selalu mencari cara untuk meningkatkan dan melayani komunitas kami dengan lebih baik. Umpan balik dan dukungan Anda adalah yang mendorong kami menjadi lebih baik setiap hari.</p>"
+    },
+    "Contact": {
+        "name": "Kontak",
+        "content": "<p>123 Jalan Utama, Distrik Pusat Kota, Kota Metro, ST 12345</p><p>+1 (555) 123-4567 (4 saluran) - +1 (555) 987-6543</p><p>+1 (555) 246-8135</p><p>contact@example.com&nbsp;&nbsp;</p><div>[contact-form][/contact-form]</div>"
+    },
+    "Cookie Consent": {
+        "name": "Kebijakan Cookie",
+        "content": "<h3>Persetujuan Cookie UE</h3><p>Untuk menggunakan situs web ini, kami menggunakan Cookie dan mengumpulkan beberapa data. Untuk mematuhi GDPR UE, kami memberi Anda pilihan untuk mengizinkan kami menggunakan Cookie tertentu dan mengumpulkan beberapa data.</p><h4>Data Penting</h4><p>Data Penting diperlukan untuk menjalankan situs yang Anda kunjungi secara teknis. Anda tidak dapat menonaktifkannya.</p><p>- Cookie Sesi: PHP menggunakan Cookie untuk mengidentifikasi sesi pengguna. Tanpa Cookie ini, situs web tidak akan berfungsi.</p><p>- Cookie XSRF-Token: Laravel secara otomatis menghasilkan \"token\" CSRF untuk setiap sesi pengguna aktif yang dikelola oleh aplikasi. Token ini digunakan untuk memverifikasi bahwa pengguna yang terautentikasi adalah yang benar-benar membuat permintaan ke aplikasi.</p>"
+    }
+}

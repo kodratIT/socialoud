@@ -1,0 +1,22 @@
+{
+    "Homepage": {
+        "name": "Accueil",
+        "content": "<div>[featured-posts limit=\"5\" enable_lazy_loading=\"yes\"][/featured-posts]</div><div>[simple-slider key=\"home-slider\" enable_lazy_loading=\"yes\"][/simple-slider]</div><div>[category-posts enable_lazy_loading=\"yes\"][/category-posts]</div><div>[all-galleries enable_lazy_loading=\"yes\"][/all-galleries]</div>"
+    },
+    "Introduction": {
+        "name": "Introduction",
+        "content": "<p>Bienvenue sur notre plateforme, o\u00f9 nous vous apportons les derni\u00e8res nouvelles, analyses et histoires du monde entier. Notre mission est de fournir un contenu de haute qualit\u00e9 qui informe, inspire et engage nos lecteurs. Nous sommes engag\u00e9s dans l'excellence journalistique et l'int\u00e9grit\u00e9 dans tout ce que nous faisons.</p><p>Fond\u00e9e par une \u00e9quipe de journalistes et cr\u00e9ateurs de contenu exp\u00e9riment\u00e9s, nous avons b\u00e2ti une r\u00e9putation de livraison d'articles pr\u00e9cis, \u00e9quilibr\u00e9s et stimulants sur un large \u00e9ventail de sujets incluant la technologie, les affaires, le style de vie, la culture et plus encore.</p><p>Notre \u00e9quipe \u00e9ditoriale travaille sans rel\u00e2che pour s'assurer que chaque contenu r\u00e9pond \u00e0 nos standards \u00e9lev\u00e9s. Nous croyons au pouvoir de la narration pour faire la diff\u00e9rence dans la vie des gens et les aider \u00e0 mieux comprendre le monde qui les entoure.</p><p>Merci de faire partie de notre communaut\u00e9. Nous avons h\u00e2te de continuer \u00e0 vous servir avec le meilleur contenu possible.</p>"
+    },
+    "About us": {
+        "name": "\u00c0 propos",
+        "content": "<p>Nous sommes une entreprise de m\u00e9dias num\u00e9riques de premier plan, d\u00e9di\u00e9e \u00e0 fournir un contenu exceptionnel \u00e0 nos lecteurs dans le monde entier. Avec une \u00e9quipe de r\u00e9dacteurs, \u00e9diteurs et cr\u00e9ateurs de contenu talentueux, nous couvrons les histoires qui comptent le plus pour vous.</p><p>Notre plateforme propose des analyses approfondies, des nouvelles de derni\u00e8re heure, des opinions d'experts et un contenu multim\u00e9dia engageant. Nous sommes fiers de notre engagement envers la pr\u00e9cision, l'\u00e9quit\u00e9 et la transparence dans nos reportages.</p><p>Ce qui nous distingue est notre concentration sur la qualit\u00e9 plut\u00f4t que la quantit\u00e9. Chaque article est soigneusement recherch\u00e9, v\u00e9rifi\u00e9 et \u00e9dit\u00e9 pour garantir que nous fournissons les informations les plus fiables \u00e0 notre public. Nous croyons que des lecteurs inform\u00e9s prennent de meilleures d\u00e9cisions, et nous nous effor\u00e7ons d'\u00eatre votre source d'information de confiance.</p><p>Rejoignez-nous dans notre voyage alors que nous continuons \u00e0 grandir et \u00e9voluer. Nous cherchons toujours des moyens de nous am\u00e9liorer et de mieux servir notre communaut\u00e9. Vos retours et votre soutien sont ce qui nous pousse \u00e0 \u00eatre meilleurs chaque jour.</p>"
+    },
+    "Contact": {
+        "name": "Contact",
+        "content": "<p>123 Rue Principale, Quartier Centre-Ville, M\u00e9tro City, ST 12345</p><p>+1 (555) 123-4567 (4 lignes) - +1 (555) 987-6543</p><p>+1 (555) 246-8135</p><p>contact@example.com&nbsp;&nbsp;</p><div>[contact-form][/contact-form]</div>"
+    },
+    "Cookie Consent": {
+        "name": "Politique des cookies",
+        "content": "<h3>Consentement aux cookies de l'UE</h3><p>Pour utiliser ce site web, nous utilisons des cookies et collectons certaines donn\u00e9es. Pour \u00eatre conforme au RGPD de l'UE, nous vous donnons le choix d'autoriser ou non l'utilisation de certains cookies et la collecte de certaines donn\u00e9es.</p><h4>Donn\u00e9es essentielles</h4><p>Les donn\u00e9es essentielles sont n\u00e9cessaires au fonctionnement technique du site que vous visitez. Vous ne pouvez pas les d\u00e9sactiver.</p><p>- Cookie de session : PHP utilise un cookie pour identifier les sessions utilisateur. Sans ce cookie, le site ne fonctionnera pas.</p><p>- Cookie XSRF-Token : Laravel g\u00e9n\u00e8re automatiquement un \"jeton\" CSRF pour chaque session utilisateur active g\u00e9r\u00e9e par l'application. Ce jeton est utilis\u00e9 pour v\u00e9rifier que l'utilisateur authentifi\u00e9 est celui qui effectue r\u00e9ellement les requ\u00eates \u00e0 l'application.</p>"
+    }
+}

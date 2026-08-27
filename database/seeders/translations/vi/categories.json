@@ -1,0 +1,17 @@
+{
+    "Discovery": {"name": "Khám phá", "description": "Chuyên mục khám phá"},
+    "Hot & Cool": {"name": "Nóng & Mát", "description": "Chuyên mục nóng và mát"},
+    "Other sports": {"name": "Thể thao khác", "description": "Chuyên mục thể thao khác"},
+    "Video": {"name": "Video", "description": "Chuyên mục video"},
+    "Football": {"name": "Bóng đá", "description": "Chuyên mục bóng đá"},
+    "Sport": {"name": "Thể thao", "description": "Chuyên mục thể thao"},
+    "Fashion": {"name": "Thời trang", "description": "Chuyên mục thời trang"},
+    "Life": {"name": "Cuộc sống", "description": "Chuyên mục cuộc sống"},
+    "Beautify": {"name": "Làm đẹp", "description": "Chuyên mục làm đẹp"},
+    "Love": {"name": "Tình yêu", "description": "Chuyên mục tình yêu"},
+    "Behind the scenes": {"name": "Hậu trường", "description": "Chuyên mục hậu trường"},
+    "Economy": {"name": "Kinh tế", "description": "Chuyên mục kinh tế"},
+    "Law": {"name": "Pháp luật", "description": "Chuyên mục pháp luật"},
+    "Business": {"name": "Kinh doanh", "description": "Chuyên mục kinh doanh"},
+    "Entertainment": {"name": "Giải trí", "description": "Chuyên mục giải trí"}
+}

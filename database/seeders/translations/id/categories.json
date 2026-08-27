@@ -1,0 +1,17 @@
+{
+    "Discovery": {"name": "Penemuan", "description": "Kategori penemuan"},
+    "Hot & Cool": {"name": "Panas & Keren", "description": "Kategori panas dan keren"},
+    "Other sports": {"name": "Olahraga Lain", "description": "Kategori olahraga lain"},
+    "Video": {"name": "Video", "description": "Kategori video"},
+    "Football": {"name": "Sepak Bola", "description": "Kategori sepak bola"},
+    "Sport": {"name": "Olahraga", "description": "Kategori olahraga"},
+    "Fashion": {"name": "Mode", "description": "Kategori mode"},
+    "Life": {"name": "Kehidupan", "description": "Kategori kehidupan"},
+    "Beautify": {"name": "Kecantikan", "description": "Kategori kecantikan"},
+    "Love": {"name": "Cinta", "description": "Kategori cinta"},
+    "Behind the scenes": {"name": "Di Balik Layar", "description": "Kategori di balik layar"},
+    "Economy": {"name": "Ekonomi", "description": "Kategori ekonomi"},
+    "Law": {"name": "Hukum", "description": "Kategori hukum"},
+    "Business": {"name": "Bisnis", "description": "Kategori bisnis"},
+    "Entertainment": {"name": "Hiburan", "description": "Kategori hiburan"}
+}

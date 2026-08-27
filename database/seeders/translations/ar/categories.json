@@ -1,0 +1,17 @@
+{
+    "Discovery": {"name": "اكتشاف", "description": "فئة الاكتشاف"},
+    "Hot & Cool": {"name": "ساخن ورائع", "description": "فئة ساخن ورائع"},
+    "Other sports": {"name": "رياضات أخرى", "description": "فئة رياضات أخرى"},
+    "Video": {"name": "فيديو", "description": "فئة الفيديو"},
+    "Football": {"name": "كرة القدم", "description": "فئة كرة القدم"},
+    "Sport": {"name": "رياضة", "description": "فئة الرياضة"},
+    "Fashion": {"name": "أزياء", "description": "فئة الأزياء"},
+    "Life": {"name": "حياة", "description": "فئة الحياة"},
+    "Beautify": {"name": "تجميل", "description": "فئة التجميل"},
+    "Love": {"name": "حب", "description": "فئة الحب"},
+    "Behind the scenes": {"name": "وراء الكواليس", "description": "فئة وراء الكواليس"},
+    "Economy": {"name": "اقتصاد", "description": "فئة الاقتصاد"},
+    "Law": {"name": "قانون", "description": "فئة القانون"},
+    "Business": {"name": "أعمال", "description": "فئة الأعمال"},
+    "Entertainment": {"name": "ترفيه", "description": "فئة الترفيه"}
+}
