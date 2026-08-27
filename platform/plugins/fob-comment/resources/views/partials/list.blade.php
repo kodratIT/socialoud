@@ -78,16 +78,17 @@
 
                         <div class="fob-comment-item-actions">
                             @if ($comment->is_approved)
-                                <a
-                                    href="{{ route('fob-comment.public.comments.reply', $comment) }}"
+                                <button
+                                    type="button"
                                     class="fob-comment-item-reply"
                                     data-comment-id="{{ $comment->getKey() }}"
+                                    data-reply-url="{{ route('fob-comment.public.comments.reply', $comment) }}"
                                     data-reply-to="{{ $replyLabel = trans('plugins/fob-comment::comment.front.list.reply_to', ['name' => $comment->name]) }}"
                                     data-cancel-reply="{{ trans('plugins/fob-comment::comment.front.list.cancel_reply') }}"
                                     aria-label="{{ $replyLabel }}"
                                 >
                                     {{ trans('plugins/fob-comment::comment.front.list.reply') }}
-                                </a>
+                                </button>
                             @endif
 
                             @if ($currentUser && $comment->author_type === $currentUser::class && $comment->author_id === $currentUser->getKey())

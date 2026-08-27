@@ -96,6 +96,10 @@ $prefix: 'fob-';
         }
 
         &-reply {
+            padding: 0;
+            border: 0;
+            cursor: pointer;
+            text-align: left;
             background-color: transparent;
             color: #888888;
             font-size: 14px;

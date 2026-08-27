@@ -90,7 +90,7 @@
 
 @if (is_plugin_active('fob-comment'))
     @php
-        Theme::asset()->container('footer')->add('fob-comment-js', asset('vendor/core/plugins/fob-comment/js/comment.js'), ['jquery'], version: '1.2.8');
+        Theme::asset()->container('footer')->add('fob-comment-js', asset('vendor/core/plugins/fob-comment/js/comment.js'), ['jquery'], version: '1.2.10');
     @endphp
 @endif
 
