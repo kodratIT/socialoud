@@ -39,7 +39,18 @@ WORKDIR /build
 COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts --no-audit --no-fund
 COPY . .
-COPY --from=php-base /var/www/html/public/vendor /build/public/vendor
+COPY --from=php-base /var/www/html/public /build/public
+RUN set -eux; \
+    for source in platform/plugins/* platform/packages/* platform/themes/*; do \
+        [ -d "$source/public" ] || continue; \
+        case "$source" in \
+            platform/plugins/*) target="public/vendor/core/plugins/${source##*/}" ;;
+            platform/packages/*) target="public/vendor/core/packages/${source##*/}" ;;
+            platform/themes/*) target="public/themes/${source##*/}" ;;
+        esac; \
+        mkdir -p "$target"; \
+        cp -a "$source/public/." "$target/"; \
+    done
 RUN NODE_OPTIONS=--max-old-space-size=384 npm run production
 
 FROM php-base AS app
