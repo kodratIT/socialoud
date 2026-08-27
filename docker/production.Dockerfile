@@ -26,6 +26,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
 RUN rm -rf vendor node_modules \
+    && rm -f bootstrap/cache/*.php \
     && composer install --no-dev --no-interaction --no-progress --prefer-dist --optimize-autoloader --no-scripts --no-plugins \
     && php artisan package:discover --ansi \
     && php artisan cms:publish:assets \
