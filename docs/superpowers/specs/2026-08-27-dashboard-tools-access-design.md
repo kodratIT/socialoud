@@ -12,13 +12,16 @@ Restricted dashboard route prefixes:
 - `settings.*`
 - `theme.*`
 - `plugins.*`
+- `sitemap.settings*`, `slug.settings*`, and `optimize.settings*` (settings pages registered outside the core `settings.*` namespace)
 
-Restricted dashboard menu IDs:
+Restricted dashboard menu IDs include the four top-level groups and their registered children:
 
 - `cms-core-tools`
 - `cms-core-settings`
 - `cms-core-appearance`
 - `cms-core-plugins`
+- Appearance children: `cms-core-menu`, `cms-core-widget`, `cms-core-theme`, `cms-core-theme-option`, `cms-core-appearance-custom-css`, `cms-core-appearance-custom-js`, `cms-core-appearance-custom-html`, and `cms-core-appearance-robots-txt`
+- Plugin children: `cms-core-plugins-installed` and `cms-core-plugins-marketplace`
 
 All other dashboard routes and permissions remain unchanged.
 

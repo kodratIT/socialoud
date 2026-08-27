@@ -15,7 +15,7 @@ class AdminHelper
 {
     public function registerRoutes(
         Closure|callable $closure,
-        array $middleware = ['web', 'core', 'auth']
+        array $middleware = ['web', 'core', 'auth', 'restrict.dashboard.management']
     ): RouteRegistrar {
         return Route::prefix(BaseHelper::getAdminPrefix())->middleware($middleware)->group(fn () => $closure());
     }
