@@ -223,8 +223,8 @@ main { transition: opacity .2s ease, transform .2s ease; }
     transform: translateX(-50%);
 }
 .socialoud-ad-slider-dot {
-    width: 9px;
-    height: 9px;
+    width: 24px;
+    height: 24px;
     border: 1px solid rgba(255, 255, 255, .85);
     border-radius: 50%;
     padding: 0;
@@ -733,7 +733,7 @@ main { transition: opacity .2s ease, transform .2s ease; }
 .socialoud-footer-brand { display: block; }
 .socialoud-footer-brand img { width: 180px; }
 .socialoud-footer-description { max-width: 280px; margin: 18px 0 0; color: #9ba1a1; font-size: 12px; line-height: 1.7; }
-.socialoud-footer-heading { margin: 2px 0 16px; color: var(--socialoud-orange); font-size: 12px; font-weight: 800; letter-spacing: .7px; text-transform: uppercase; }
+.socialoud-footer-heading { margin: 2px 0 16px; color: #ff6b6b; font-size: 12px; font-weight: 800; letter-spacing: .7px; text-transform: uppercase; }
 .socialoud-footer-contact-list { display: grid; gap: 12px; }
 .socialoud-footer-contact-item { display: grid; gap: 3px; margin: 0; font-size: 12px; line-height: 1.5; }
 .socialoud-footer-contact-item span { color: #7f8787; font-size: 9px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; }
