@@ -21,7 +21,7 @@
         }
     </style>
     {!! Theme::header() !!}
-    <link rel="stylesheet" href="{{ Theme::asset()->url('css/socialoud.css') }}?v={{ filemtime(public_path('themes/socialoud/css/socialoud.css')) }}">
+    <link rel="stylesheet" href="{{ Theme::asset()->url('css/socialoud.css') }}?v={{ md5_file(public_path('themes/socialoud/css/socialoud.css')) }}">
 </head>
 <body {!! Theme::bodyAttributes() !!}>
 {!! apply_filters(THEME_FRONT_BODY, null) !!}

@@ -92,6 +92,6 @@
 {!! Theme::footer() !!}
 <div id="fb-root"></div>
 <div id="socialoud-runtime"></div>
-<script defer src="{{ Theme::asset()->url('js/socialoud.js') }}?v={{ filemtime(public_path('themes/socialoud/js/socialoud.js')) }}"></script>
+<script defer src="{{ Theme::asset()->url('js/socialoud.js') }}?v={{ md5_file(public_path('themes/socialoud/js/socialoud.js')) }}"></script>
 </body>
 </html>
