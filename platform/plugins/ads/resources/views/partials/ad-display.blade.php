@@ -11,6 +11,7 @@
 
     @php($isFirstImage = $imageIndex === 0)
     @php($imageIndex++)
+    @php($isWideSlot = in_array($attributes['data-ad-context'] ?? null, ['before-featured-posts', 'top-single-page'], true))
     <div {!! Html::attributes($attributes) !!}>
         @if ($item->url)
             <a href="{{ $item->click_url }}" @if ($item->open_in_new_tab) target="_blank" @endif title="{{ trans('plugins/ads::ads.banner') }}">
@@ -30,9 +31,10 @@
                     />
                     <img
                         @if ($isFirstImage) src="{{ $item->image_url }}" @else data-src="{{ $item->image_url }}" @endif
-                        alt="{{ $item->name }}"
-                        width="1200"
-                        height="400"
+                        @if ($isWideSlot)
+                            width="1200"
+                            height="400"
+                        @endif
                         loading="lazy"
                         decoding="async"
                         style="max-width: 100%"

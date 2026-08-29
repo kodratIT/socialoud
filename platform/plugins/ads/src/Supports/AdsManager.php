@@ -36,6 +36,7 @@ class AdsManager
             $data = $data->random(1);
         }
 
+        $attributes['data-ad-context'] ??= $location;
         return view('plugins/ads::partials.ad-display', compact('data', 'attributes'))->render();
     }
 
@@ -98,6 +99,7 @@ class AdsManager
             $attributes['style'] = 'text-align: center;';
         }
 
+        $attributes['data-ad-context'] ??= 'single';
         return view('plugins/ads::partials.ad-display', compact('data', 'attributes'))->render();
     }
 
