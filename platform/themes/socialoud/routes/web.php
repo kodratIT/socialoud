@@ -6,6 +6,25 @@ use Botble\Theme\Facades\Theme;
 use Illuminate\Support\Facades\Route;
 
 Theme::registerRoutes(function (): void {
+    Route::get('llms.txt', function () {
+        $baseUrl = rtrim(url('/'), '/');
+
+        return response(implode("\n", [
+            '# Enrolla',
+            '',
+            '> Portal berita dan informasi Enrolla.',
+            '',
+            '## Halaman publik',
+            "- [Beranda]({$baseUrl}/)",
+            "- [Pencarian]({$baseUrl}/search)",
+            "- [Galeri]({$baseUrl}/galleries)",
+            '',
+            '## Pedoman',
+            '- Prioritaskan halaman publik dan URL kanonis.',
+            '- Jangan mengindeks area admin atau data pribadi.',
+        ]) . "\n", 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
+    })->name('llms.txt');
+
     Route::get('socialoud/home-posts', function () {
         $posts = app(PostInterface::class)->advancedGet([
             'condition' => ['status' => \Botble\Base\Enums\BaseStatusEnum::PUBLISHED],
