@@ -1,6 +1,4 @@
-import jquery from 'jquery';
-const jqueryFactory = typeof jquery === 'function' ? jquery : jquery?.default;
-const jqueryInstance = jqueryFactory || (typeof window.jQuery === 'function' ? window.jQuery : typeof window.$ === 'function' ? window.$ : null);
+const jqueryInstance = typeof window.jQuery === 'function' ? window.jQuery : typeof window.$ === 'function' ? window.$ : null;
 const notifyRuntimeReady = () => {
     window.dispatchEvent(new CustomEvent('socialoud:runtime-ready', { detail: { jquery: jqueryInstance } }));
 };

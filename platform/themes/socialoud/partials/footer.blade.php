@@ -89,6 +89,14 @@
 </footer>
 
 
+@php
+    $footerAssets = Theme::asset()->container('footer');
+    if (($footerAssets->get('gallery-js') || $footerAssets->get('fob-comment-js')) && ! $footerAssets->get('jquery')) {
+        $footerAssets
+            ->usePath(false)
+            ->add('jquery', asset('vendor/core/core/base/libraries/jquery.min.js'), [], [], '4.0.0');
+    }
+@endphp
 {!! Theme::footer() !!}
 <div id="fb-root"></div>
 <div id="socialoud-runtime"></div>
