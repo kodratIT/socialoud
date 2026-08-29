@@ -66,7 +66,7 @@
 
             @if ($post->getMetaData('display_featured_image_at_the_top', true))
                 <figure class="socialoud-article-cover">
-                    {!! RvMedia::image($post->image, $post->name) !!}
+                    {!! RvMedia::image($post->image, $post->name, attributes: ['width' => 1200, 'height' => 675, 'decoding' => 'async']) !!}
                 </figure>
             @endif
 
@@ -137,7 +137,7 @@
                             <a href="{{ $popularPost->url }}" class="socialoud-rank-row">
                                 <span>{{ $loop->iteration }}</span>
                                 <span class="socialoud-rank-thumb">
-                                    {!! RvMedia::image($popularPost->image, $popularPost->name, 'thumb') !!}
+                                    {!! RvMedia::image($popularPost->image, $popularPost->name, 'thumb', attributes: ['width' => 44, 'height' => 44, 'decoding' => 'async']) !!}
                                 </span>
                                 <strong>{!! BaseHelper::clean($popularPost->name) !!}</strong>
                             </a>

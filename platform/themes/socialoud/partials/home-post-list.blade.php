@@ -1,7 +1,7 @@
 @foreach ($posts as $post)
     <article class="socialoud-news-row">
         <a href="{{ $post->url }}" class="socialoud-news-image">
-            {!! RvMedia::image($post->image, $post->name) !!}
+            {!! RvMedia::image($post->image, $post->name, attributes: ['width' => 180, 'height' => 94, 'decoding' => 'async']) !!}
         </a>
         <div>
             <div class="socialoud-category">{{ $post->first_category?->name ?: __('News') }} <span>•</span></div>

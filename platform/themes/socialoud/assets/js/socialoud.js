@@ -1,4 +1,3 @@
-import { createApp } from 'vue';
 import jquery from 'jquery';
 const jqueryFactory = typeof jquery === 'function' ? jquery : jquery?.default;
 const jqueryInstance = jqueryFactory || (typeof window.jQuery === 'function' ? window.jQuery : typeof window.$ === 'function' ? window.$ : null);
@@ -420,11 +419,22 @@ const SocialoudRuntime = {
                 const next = slider.querySelector('[data-socialoud-ad-next]');
                 let active = 0;
                 const sliderState = { slider, timer: null };
+                const hydrate = (slide) => {
+                    slide.querySelectorAll('source[data-srcset]').forEach((source) => {
+                        source.srcset = source.dataset.srcset;
+                        source.removeAttribute('data-srcset');
+                    });
+                    slide.querySelectorAll('img[data-src]').forEach((image) => {
+                        image.src = image.dataset.src;
+                        image.removeAttribute('data-src');
+                    });
+                };
 
                 const show = (index) => {
                     active = (index + slides.length) % slides.length;
                     slides.forEach((slide, slideIndex) => {
                         const isActive = slideIndex === active;
+                        if (isActive) hydrate(slide);
                         slide.classList.toggle('is-active', isActive);
                         slide.setAttribute('aria-hidden', String(!isActive));
                     });
@@ -582,4 +592,10 @@ const SocialoudRuntime = {
 };
 
 const mountPoint = document.querySelector('#socialoud-runtime');
-if (mountPoint) createApp(SocialoudRuntime).mount(mountPoint);
+if (mountPoint) {
+    const runtime = SocialoudRuntime.data();
+    Object.entries(SocialoudRuntime.methods).forEach(([name, method]) => {
+        runtime[name] = method.bind(runtime);
+    });
+    SocialoudRuntime.mounted.call(runtime);
+}

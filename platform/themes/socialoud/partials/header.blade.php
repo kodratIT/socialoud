@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=1" name="viewport">
-    {!! BaseHelper::googleFonts('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap') !!}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
         try {
@@ -33,8 +32,8 @@
         </button>
 
         <a href="{{ route('public.single') }}" class="socialoud-brand" aria-label="{{ theme_option('site_title', 'Socialoud') }}">
-            <img class="socialoud-logo socialoud-logo-white" src="{{ Theme::asset()->url('images/branding/socialoud-white.png') }}" alt="{{ theme_option('site_title', 'Socialoud') }}">
-            <img class="socialoud-logo socialoud-logo-red" src="{{ Theme::asset()->url('images/branding/socialoud-red.png') }}" alt="" aria-hidden="true">
+            <img class="socialoud-logo socialoud-logo-white" src="{{ Theme::asset()->url('images/branding/socialoud-white.png') }}" alt="{{ theme_option('site_title', 'Socialoud') }}" width="600" height="113">
+            <img class="socialoud-logo socialoud-logo-red" src="{{ Theme::asset()->url('images/branding/socialoud-red.png') }}" alt="" aria-hidden="true" width="600" height="113">
         </a>
 
         <nav class="socialoud-nav" aria-label="{{ __('Main navigation') }}">

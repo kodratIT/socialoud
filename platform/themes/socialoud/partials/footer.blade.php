@@ -17,8 +17,8 @@
         <div class="socialoud-container socialoud-footer-grid">
             <section class="socialoud-footer-brand-block">
                 <a href="{{ route('public.single') }}" class="socialoud-footer-brand" aria-label="{{ theme_option('site_title', 'Socialoud') }}">
-                    <img class="socialoud-logo socialoud-logo-white" src="{{ Theme::asset()->url('images/branding/socialoud-white.png') }}" alt="{{ theme_option('site_title', 'Socialoud') }}">
-                    <img class="socialoud-logo socialoud-logo-red" src="{{ Theme::asset()->url('images/branding/socialoud-red.png') }}" alt="" aria-hidden="true">
+                    <img class="socialoud-logo socialoud-logo-white" src="{{ Theme::asset()->url('images/branding/socialoud-white.png') }}" alt="{{ theme_option('site_title', 'Socialoud') }}" width="600" height="113">
+                    <img class="socialoud-logo socialoud-logo-red" src="{{ Theme::asset()->url('images/branding/socialoud-red.png') }}" alt="" aria-hidden="true" width="600" height="113">
                 </a>
                 @if ($footerDescription)
                     <p class="socialoud-footer-description">{{ $footerDescription }}</p>
@@ -88,15 +88,10 @@
     </div>
 </footer>
 
-@if (is_plugin_active('fob-comment'))
-    @php
-        Theme::asset()->container('footer')->add('fob-comment-js', asset('vendor/core/plugins/fob-comment/js/comment.js'), ['jquery'], version: '1.2.10');
-    @endphp
-@endif
 
 {!! Theme::footer() !!}
 <div id="fb-root"></div>
 <div id="socialoud-runtime"></div>
-<script src="{{ Theme::asset()->url('js/socialoud.js') }}?v={{ filemtime(public_path('themes/socialoud/js/socialoud.js')) }}"></script>
+<script defer src="{{ Theme::asset()->url('js/socialoud.js') }}?v={{ filemtime(public_path('themes/socialoud/js/socialoud.js')) }}"></script>
 </body>
 </html>

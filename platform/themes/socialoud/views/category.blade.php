@@ -87,7 +87,7 @@
                             <a href="{{ $post->url }}" class="socialoud-rank-row">
                                 <span>{{ $loop->iteration }}</span>
                                 <span class="socialoud-rank-thumb">
-                                    {!! RvMedia::image($post->image, $post->name, 'thumb') !!}
+                                    {!! RvMedia::image($post->image, $post->name, 'thumb', attributes: ['width' => 44, 'height' => 44, 'decoding' => 'async']) !!}
                                 </span>
                                 <strong>{!! BaseHelper::clean($post->name) !!}</strong>
                             </a>

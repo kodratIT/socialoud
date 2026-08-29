@@ -58,7 +58,7 @@
                                 $imageTitle = BaseHelper::clean(Arr::get($image, 'description')) ?: $gallery->name;
                             @endphp
                             <a href="{{ $imageUrl }}" class="socialoud-gallery-photo" data-socialoud-gallery-preview data-gallery-image="{{ $imageUrl }}" data-gallery-title="{{ $imageTitle }}">
-                                {!! RvMedia::image(Arr::get($image, 'img'), $imageTitle, 'medium') !!}
+                                {!! RvMedia::image(Arr::get($image, 'img'), $imageTitle, 'medium', attributes: ['width' => 600, 'height' => 600, 'decoding' => 'async']) !!}
                             </a>
                         @endforeach
                     </div>
@@ -84,7 +84,7 @@
                             <a href="{{ $post->url }}" class="socialoud-rank-row">
                                 <span>{{ $loop->iteration }}</span>
                                 <span class="socialoud-rank-thumb">
-                                    {!! RvMedia::image($post->image, $post->name, 'thumb') !!}
+                                    {!! RvMedia::image($post->image, $post->name, 'thumb', attributes: ['width' => 44, 'height' => 44, 'decoding' => 'async']) !!}
                                 </span>
                                 <strong>{!! BaseHelper::clean($post->name) !!}</strong>
                             </a>

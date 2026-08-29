@@ -48,7 +48,7 @@
                     @foreach ($galleries as $gallery)
                         <article class="socialoud-gallery-card" data-socialoud-gallery-card @if ($loop->index >= 6) hidden @endif>
                             <a href="{{ $gallery->url }}" class="socialoud-gallery-image">
-                                {!! RvMedia::image($gallery->image ?? RvMedia::getDefaultImage(), $gallery->name, 'medium') !!}
+                                {!! RvMedia::image($gallery->image ?? RvMedia::getDefaultImage(), $gallery->name, 'medium', attributes: ['width' => 600, 'height' => 450, 'decoding' => 'async']) !!}
                             </a>
                             <div class="socialoud-gallery-info">
                                 <h2><a href="{{ $gallery->url }}">{!! BaseHelper::clean($gallery->name) !!}</a></h2>
@@ -81,7 +81,7 @@
                             <a href="{{ $post->url }}" class="socialoud-rank-row">
                                 <span>{{ $loop->iteration }}</span>
                                 <span class="socialoud-rank-thumb">
-                                    {!! RvMedia::image($post->image, $post->name, 'thumb') !!}
+                                    {!! RvMedia::image($post->image, $post->name, 'thumb', attributes: ['width' => 44, 'height' => 44, 'decoding' => 'async']) !!}
                                 </span>
                                 <strong>{!! BaseHelper::clean($post->name) !!}</strong>
                             </a>

@@ -26,7 +26,14 @@
             <section class="socialoud-hero-grid" aria-label="{{ __('Featured stories') }}">
                 @foreach ($heroPosts->take(2) as $post)
                     <article class="socialoud-hero-card @if ($loop->index === 1) socialoud-hero-card-small @endif">
-                        {!! RvMedia::image($post->image, $post->name, attributes: ['class' => 'socialoud-cover']) !!}
+                        {!! RvMedia::image($post->image, $post->name, attributes: [
+                            'class' => 'socialoud-cover',
+                            'width' => 1200,
+                            'height' => 405,
+                            'loading' => $loop->first ? 'eager' : 'lazy',
+                            'fetchpriority' => $loop->first ? 'high' : 'auto',
+                            'decoding' => 'async',
+                        ]) !!}
                         <div class="socialoud-hero-content">
                             <span class="socialoud-badge">{{ $post->first_category?->name ?: __('News') }}</span>
                             <h1 class="socialoud-hero-title @if ($loop->index === 1) socialoud-hero-title-small @endif">
@@ -51,7 +58,7 @@
                     @foreach ($heroPosts->slice(2, 5) as $post)
                         <article class="socialoud-mini-card">
                             <a href="{{ $post->url }}" class="socialoud-mini-image">
-                                {!! RvMedia::image($post->image, $post->name) !!}
+                                {!! RvMedia::image($post->image, $post->name, attributes: ['width' => 240, 'height' => 118, 'decoding' => 'async']) !!}
                             </a>
                             <span class="socialoud-badge socialoud-badge-small">{{ $post->first_category?->name ?: __('News') }}</span>
                             <h2><a href="{{ $post->url }}">{!! BaseHelper::clean($post->name) !!}</a></h2>
@@ -102,7 +109,7 @@
                     @forelse ($latestPosts as $post)
                         <article class="socialoud-news-row">
                             <a href="{{ $post->url }}" class="socialoud-news-image">
-                                {!! RvMedia::image($post->image, $post->name) !!}
+                                {!! RvMedia::image($post->image, $post->name, attributes: ['width' => 180, 'height' => 94, 'decoding' => 'async']) !!}
                             </a>
                             <div>
                                 <div class="socialoud-category">{{ $post->first_category?->name ?: __('News') }} <span>•</span></div>
@@ -148,7 +155,7 @@
                                 <a href="{{ $post->url }}" class="socialoud-rank-row">
                                     <span>{{ $loop->iteration }}</span>
                                     <span class="socialoud-rank-thumb">
-                                        {!! RvMedia::image($post->image, $post->name, 'thumb') !!}
+                                        {!! RvMedia::image($post->image, $post->name, 'thumb', attributes: ['width' => 44, 'height' => 44, 'decoding' => 'async']) !!}
                                     </span>
                                     <strong>{!! BaseHelper::clean($post->name) !!}</strong>
                                 </a>
@@ -167,7 +174,7 @@
                             @foreach ($videoPosts as $post)
                                 <a href="{{ $post->url }}" class="socialoud-video-card">
                                     <span class="socialoud-video-thumb" aria-hidden="true">
-                                        {!! RvMedia::image($post->image, $post->name, 'thumb') !!}
+                                        {!! RvMedia::image($post->image, $post->name, 'thumb', attributes: ['width' => 84, 'height' => 52, 'decoding' => 'async']) !!}
                                     </span>
                                     <strong>{!! BaseHelper::clean($post->name) !!}</strong>
                                 </a>
@@ -252,7 +259,7 @@
                                     <a href="{{ $post->url }}" class="socialoud-rank-row">
                                         <span>{{ $loop->iteration }}</span>
                                         <span class="socialoud-rank-thumb">
-                                            {!! RvMedia::image($post->image, $post->name, 'thumb') !!}
+                                            {!! RvMedia::image($post->image, $post->name, 'thumb', attributes: ['width' => 44, 'height' => 44, 'decoding' => 'async']) !!}
                                         </span>
                                         <strong>{!! BaseHelper::clean($post->name) !!}</strong>
                                     </a>
