@@ -351,27 +351,49 @@ const SocialoudRuntime = {
             const order = Number(coverAd.dataset.socialoudPopupOrder);
             const daily = Number.isFinite(order) && order < 100;
             const seenKey = `socialoud-cover-ad-seen:${coverAd.dataset.socialoudPopupKey || 'default'}`;
-            if (daily) {
-                try {
-                    if (localStorage.getItem(seenKey) === this.getCoverAdDay()) return;
-                    localStorage.setItem(seenKey, this.getCoverAdDay());
-                } catch (_) {}
+            try {
+                if (daily && localStorage.getItem(seenKey) === this.getCoverAdDay()) return;
+            } catch (_) {}
+
+            const open = () => {
+                if (!coverAd.hidden) return;
+                if (daily) {
+                    try {
+                        localStorage.setItem(seenKey, this.getCoverAdDay());
+                    } catch (_) {}
+                }
+                window.clearTimeout(this.modalTimer);
+                window.clearInterval(this.modalCountdownTimer);
+                coverAd.hidden = false;
+                document.body.classList.add('socialoud-modal-open');
+                coverAd.querySelector('.socialoud-ad-modal-close')?.focus();
+
+                let seconds = 5;
+                this.updateCoverAdCountdown(coverAd, seconds);
+                this.modalCountdownTimer = window.setInterval(() => {
+                    seconds -= 1;
+                    if (seconds <= 0) return;
+                    this.updateCoverAdCountdown(coverAd, seconds);
+                }, 1000);
+                this.modalTimer = window.setTimeout(() => this.closeCoverAd(), 5000);
+            };
+
+            const image = coverAd.querySelector('.socialoud-ad-modal-creative img');
+            if (!image) {
+                open();
+                return;
             }
 
-            window.clearTimeout(this.modalTimer);
-            window.clearInterval(this.modalCountdownTimer);
-            coverAd.hidden = false;
-            document.body.classList.add('socialoud-modal-open');
-            coverAd.querySelector('.socialoud-ad-modal-close')?.focus();
-
-            let seconds = 5;
-            this.updateCoverAdCountdown(coverAd, seconds);
-            this.modalCountdownTimer = window.setInterval(() => {
-                seconds -= 1;
-                if (seconds <= 0) return;
-                this.updateCoverAdCountdown(coverAd, seconds);
-            }, 1000);
-            this.modalTimer = window.setTimeout(() => this.closeCoverAd(), 5000);
+            image.loading = 'eager';
+            const showWhenReady = () => {
+                if (image.naturalWidth === 0) return;
+                open();
+            };
+            if (image.complete) {
+                showWhenReady();
+            } else {
+                image.addEventListener('load', showWhenReady, { once: true });
+            }
         },
 
         closeCoverAd() {
@@ -425,7 +447,8 @@ const SocialoudRuntime = {
                         source.removeAttribute('data-srcset');
                     });
                     slide.querySelectorAll('img[data-src]').forEach((image) => {
-                        image.src = image.dataset.src;
+                        image.loading = 'eager';
+                        image.setAttribute('src', image.dataset.src);
                         image.removeAttribute('data-src');
                     });
                 };
