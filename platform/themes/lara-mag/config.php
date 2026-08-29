@@ -44,6 +44,9 @@ return [
         // this event should call to assign some assets,
         // breadcrumb template.
         'beforeRenderTheme' => function (Theme $theme): void {
+            if ($theme->getThemeName() === 'socialoud') {
+                return;
+            }
             // You may use this event to set up your assets.
 
             $version = get_cms_version();
