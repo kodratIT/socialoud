@@ -35,6 +35,7 @@
                             width="1200"
                             height="400"
                         @endif
+                        alt="{{ $item->name }}"
                         loading="lazy"
                         decoding="async"
                         style="max-width: 100%"
