@@ -1,6 +1,6 @@
 <div class="socialoud-ad-modal" data-socialoud-cover-ad data-socialoud-popup-key="{{ $popupAdKey ?? 'default' }}" data-socialoud-popup-order="{{ $popupAdOrder ?? 0 }}" hidden role="dialog" aria-modal="true" aria-label="Advertisement">
     <div class="socialoud-ad-modal-backdrop" data-socialoud-ad-close></div>
-    <div class="socialoud-ad-modal-card">
+    <div class="socialoud-ad-modal-card @if ($popupAd) socialoud-ad-modal-card-creative @endif">
         <button class="socialoud-ad-modal-close" type="button" aria-label="Tutup iklan" data-socialoud-ad-close>×</button>
         @if (!$popupAd)
             <span class="socialoud-ad-modal-label">ADVERTISEMENT</span>

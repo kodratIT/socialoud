@@ -274,6 +274,15 @@ main { transition: opacity .2s ease, transform .2s ease; }
     background: #0d1010;
     box-shadow: 0 24px 80px rgba(0, 0, 0, .6);
 }
+.socialoud-ad-modal-card-creative {
+    width: min(728px, 100%);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .55);
+    border-radius: 2px;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
 .socialoud-ad-modal-close {
     position: absolute;
     top: 4px;

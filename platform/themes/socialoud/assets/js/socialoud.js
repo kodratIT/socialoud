@@ -68,6 +68,9 @@ const SocialoudRuntime = {
         window.clearTimeout(this.modalTimer);
         window.clearInterval(this.modalCountdownTimer);
         this.adSliderTimers.forEach(({ timer }) => window.clearInterval(timer));
+        if (this.coverAdScrollHandler) {
+            window.removeEventListener('scroll', this.coverAdScrollHandler);
+        }
     },
 
     methods: {
@@ -404,16 +407,25 @@ const SocialoudRuntime = {
                 this.modalTimer = window.setTimeout(() => this.closeCoverAd(), 5000);
             };
 
+            const waitForScroll = () => {
+                const openOnScroll = () => {
+                    this.coverAdScrollHandler = null;
+                    open();
+                };
+                this.coverAdScrollHandler = openOnScroll;
+                window.addEventListener('scroll', openOnScroll, { once: true, passive: true });
+            };
+
             const image = coverAd.querySelector('.socialoud-ad-modal-creative img');
             if (!image) {
-                open();
+                waitForScroll();
                 return;
             }
 
             image.loading = 'eager';
             const showWhenReady = () => {
                 if (image.naturalWidth === 0) return;
-                open();
+                waitForScroll();
             };
             if (image.complete) {
                 showWhenReady();
