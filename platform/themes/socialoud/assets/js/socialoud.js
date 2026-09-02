@@ -75,6 +75,15 @@ const SocialoudRuntime = {
 
     methods: {
         bindPage() {
+            document.querySelectorAll('source[data-srcset]').forEach((source) => {
+                source.srcset = source.dataset.srcset;
+                source.removeAttribute('data-srcset');
+            });
+            document.querySelectorAll('img[data-src]').forEach((image) => {
+                image.loading = 'eager';
+                image.setAttribute('src', image.dataset.src);
+                image.removeAttribute('data-src');
+            });
             this.updateSubcategoryArrows();
             this.bindAdSliders();
             this.bindGalleryModal();
