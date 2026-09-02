@@ -56,11 +56,16 @@ main { transition: opacity .2s ease, transform .2s ease; }
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
 }
+@keyframes socialoud-ad-slide-up {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     main { transition: none; }
     .socialoud-page-enter { animation: none; }
     .socialoud-ad-slides > div { transition: none; }
+    .socialoud-ad-modal-card-creative { animation: none; }
 }
 
 /* Header */
@@ -278,6 +283,7 @@ main { transition: opacity .2s ease, transform .2s ease; }
     width: min(728px, 100%);
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, .55);
+    animation: socialoud-ad-slide-up .45s cubic-bezier(.22, 1, .36, 1) both;
     border-radius: 2px;
     padding: 0;
     background: transparent;
