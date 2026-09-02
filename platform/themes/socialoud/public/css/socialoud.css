@@ -280,7 +280,8 @@ main { transition: opacity .2s ease, transform .2s ease; }
     box-shadow: 0 24px 80px rgba(0, 0, 0, .6);
 }
 .socialoud-ad-modal-card-creative {
-    width: min(728px, 100%);
+    width: fit-content;
+    max-width: calc(100vw - 40px);
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, .55);
     animation: socialoud-ad-slide-up 2s ease-out both;
@@ -289,6 +290,7 @@ main { transition: opacity .2s ease, transform .2s ease; }
     background: transparent;
     box-shadow: none;
 }
+.socialoud-ad-modal-creative { max-width: 100%; }
 .socialoud-ad-modal-close {
     position: absolute;
     top: 4px;
