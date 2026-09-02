@@ -37,17 +37,42 @@ button, input { font: inherit; }
 main { transition: opacity .2s ease, transform .2s ease; }
 .socialoud-navigation-loading::before {
     position: fixed;
+    z-index: 1000;
     top: 0;
     left: 0;
-    z-index: 200;
     width: 35%;
     height: 3px;
-    background: var(--socialoud-orange);
     content: "";
+    background: var(--socialoud-red);
     animation: socialoud-progress 1s ease-in-out infinite;
 }
-.socialoud-navigation-loading main { opacity: .4; transform: translateY(4px); }
+.socialoud-navigation-loading main {
+    position: relative;
+    min-height: 520px;
+    opacity: 1;
+    transform: none;
+    overflow: hidden;
+}
+.socialoud-navigation-loading main > * { visibility: hidden; }
+.socialoud-navigation-loading main::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background:
+        linear-gradient(#252b2b 0 0) 6% 7% / 30% 24px no-repeat,
+        linear-gradient(#252b2b 0 0) 6% 15% / 88% 180px no-repeat,
+        linear-gradient(#252b2b 0 0) 6% 44% / 88% 18px no-repeat,
+        linear-gradient(#252b2b 0 0) 6% 51% / 78% 18px no-repeat,
+        linear-gradient(#252b2b 0 0) 6% 58% / 84% 18px no-repeat,
+        linear-gradient(110deg, #202626 30%, #303737 45%, #202626 60%);
+    background-size: 30% 24px, 88% 180px, 88% 18px, 78% 18px, 84% 18px, 200% 100%;
+    animation: socialoud-skeleton-shimmer 1.4s linear infinite;
+}
 .socialoud-page-enter { animation: socialoud-page-enter .22s ease both; }
+@keyframes socialoud-skeleton-shimmer {
+    from { background-position: 6% 7%, 6% 15%, 6% 44%, 6% 51%, 6% 58%, 100% 0; }
+    to { background-position: 6% 7%, 6% 15%, 6% 44%, 6% 51%, 6% 58%, -100% 0; }
+}
 @keyframes socialoud-progress {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(300%); }
@@ -63,7 +88,8 @@ main { transition: opacity .2s ease, transform .2s ease; }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     main { transition: none; }
-    .socialoud-page-enter { animation: none; }
+    .socialoud-page-enter, .socialoud-skeleton-shimmer { animation: none; }
+    .socialoud-navigation-loading main::after { animation: none; }
     .socialoud-ad-slides > div { transition: none; }
     .socialoud-ad-modal-card-creative { animation: none; }
 }
