@@ -93,7 +93,7 @@ class PostTable extends TableAbstract
                 CreatedAtColumn::make(),
                 StatusColumn::make()
                     ->renderUsing(function (StatusColumn $column, $value) {
-                        if ($value instanceof BaseStatusEnum && $value === BaseStatusEnum::PENDING()) {
+                        if ($value instanceof BaseStatusEnum && $value->getValue() === BaseStatusEnum::PENDING) {
                             return Html::tag('span', 'Review', ['class' => 'badge bg-warning text-warning-fg']);
                         }
 
