@@ -235,6 +235,33 @@ const SocialoudRuntime = {
             return url.origin === window.location.origin && !url.pathname.startsWith('/admin');
         },
 
+        async loadPageScripts(nextDocument) {
+            const loadedScripts = new Set([...document.scripts].map((script) => script.src).filter(Boolean));
+            const scripts = [...nextDocument.scripts].filter((script) => {
+                return script.src
+                    && !loadedScripts.has(script.src)
+                    && !script.src.includes('/themes/socialoud/js/socialoud.js');
+            });
+
+            for (const source of scripts) {
+                await new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = source.src;
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+            }
+
+            nextDocument.querySelectorAll('script:not([src])').forEach((source) => {
+                if (!source.textContent.includes('.validate(')) return;
+
+                const script = document.createElement('script');
+                script.textContent = source.textContent;
+                document.body.appendChild(script);
+            });
+        },
+
         async navigate(url, push = true) {
             if (this.navigationLoading) return;
 
@@ -264,6 +291,7 @@ const SocialoudRuntime = {
                     window.location.href = url;
                     return;
                 }
+                await this.loadPageScripts(nextDocument);
 
                 const nextMainElement = document.importNode(nextMain, true);
                 nextMainElement.classList.add('socialoud-page-enter');
