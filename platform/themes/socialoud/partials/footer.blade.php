@@ -77,11 +77,9 @@
     <div class="socialoud-footer-bottom">
         <div class="socialoud-container socialoud-footer-bottom-inner">
             <div class="socialoud-socials" aria-label="{{ __('Social media') }}">
-                <a href="#" aria-label="Instagram">◎</a>
-                <a href="#" aria-label="X">𝕏</a>
-                <a href="#" aria-label="Facebook">f</a>
-                <a href="#" aria-label="TikTok">♪</a>
-                <a href="#" aria-label="YouTube">▶</a>
+                <a href="https://www.instagram.com/socialoud.id" target="_blank" rel="noopener noreferrer" aria-label="Instagram: socialoud.id"><span class="socialoud-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" class="socialoud-social-icon-fill"></circle></svg></span><strong>socialoud.id</strong></a>
+                <a href="https://www.tiktok.com/@socialoud.id" target="_blank" rel="noopener noreferrer" aria-label="TikTok: socialoud.id"><span class="socialoud-social-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M14 4v10.2a4.8 4.8 0 1 1-3.5-4.6v3.2a1.8 1.8 0 1 0 1.8 1.8V4h1.7c.8 1.5 2.3 2.4 4 2.6v3.1A8 8 0 0 1 14 8.2"></path></svg></span><strong>socialoud.id</strong></a>
+                <a href="https://www.threads.net/@socialoud.id" target="_blank" rel="noopener noreferrer" aria-label="Threads: socialoud.id"><span class="socialoud-social-icon" aria-hidden="true">@</span><strong>socialoud.id</strong></a>
             </div>
             <div class="socialoud-copyright">{!! Theme::getSiteCopyright() !!}</div>
         </div>

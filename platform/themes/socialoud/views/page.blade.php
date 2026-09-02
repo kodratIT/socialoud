@@ -160,7 +160,7 @@
                 @if ($videoPosts->isNotEmpty())
                     <section class="socialoud-side-card">
                         <div class="socialoud-side-header">
-                            <h2>socialoud<span> Video</span></h2>
+                            <h2>Local <span>loud</span></h2>
                             <a href="{{ route('public.search') }}">Lihat semua ›</a>
                         </div>
                         <div class="socialoud-video-list">
