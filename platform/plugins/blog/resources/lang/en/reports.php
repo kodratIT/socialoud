@@ -8,7 +8,7 @@ return [
     'total_tags' => 'Total Tags',
     'published' => 'Published',
     'draft' => 'Draft',
-    'pending' => 'Pending',
+    'pending' => 'Review',
     'posts_per_category' => 'Posts per Category',
     'posts_count' => 'Posts Count',
     'top_viewed_posts' => 'Top Viewed Posts',

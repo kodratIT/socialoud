@@ -8,7 +8,7 @@ return [
     'total_tags' => 'Total Tag',
     'published' => 'Diterbitkan',
     'draft' => 'Draf',
-    'pending' => 'Tertunda',
+    'pending' => 'Review',
     'posts_per_category' => 'Artikel per Kategori',
     'posts_count' => 'Jumlah Artikel',
     'top_viewed_posts' => 'Artikel Terpopuler',

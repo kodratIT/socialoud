@@ -42,7 +42,7 @@ final class PostStatusWorkflow
 
         foreach (self::allowedValues($user) as $value) {
             if (array_key_exists($value, $labels)) {
-                $choices[$value] = $labels[$value];
+                $choices[$value] = $value === BaseStatusEnum::PENDING ? 'Review' : $labels[$value];
             }
         }
 

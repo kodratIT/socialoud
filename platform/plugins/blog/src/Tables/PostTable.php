@@ -2,6 +2,7 @@
 
 namespace Botble\Blog\Tables;
 
+use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Base\Facades\Html;
 use Botble\Base\Models\BaseQueryBuilder;
 use Botble\Blog\Models\Category;
@@ -90,7 +91,14 @@ class PostTable extends TableAbstract
                         return number_format($column->getItem()->views);
                     }),
                 CreatedAtColumn::make(),
-                StatusColumn::make(),
+                StatusColumn::make()
+                    ->renderUsing(function (StatusColumn $column, $value) {
+                        if ($value instanceof BaseStatusEnum && $value === BaseStatusEnum::PENDING()) {
+                            return Html::tag('span', 'Review', ['class' => 'badge bg-warning text-warning-fg']);
+                        }
+
+                        return $column->formattedValue($value);
+                    }),
             ])
             ->addBulkActions([
                 DeleteBulkAction::make()->permission('posts.destroy'),
