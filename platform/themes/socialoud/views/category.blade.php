@@ -34,7 +34,6 @@
         <button class="socialoud-subcategory-arrow" type="button" data-subcategory-prev aria-label="Subkategori sebelumnya">‹</button>
         <nav class="socialoud-subcategory-nav" aria-label="Subkategori {!! BaseHelper::clean($category->name) !!}">
             <button class="is-active" type="button" data-category-filter data-category-id="{{ $category->getKey() }}" data-category-all="1" data-category-label="{{ e($category->name) }}">Semua</button>
-            <button type="button" data-category-filter data-category-id="{{ $category->getKey() }}" data-category-label="{{ e($category->name) }}">{!! BaseHelper::clean($category->name) !!}</button>
             @foreach ($subcategories as $subcategory)
                 <button type="button" data-category-filter data-category-id="{{ $subcategory->getKey() }}" data-category-label="{{ e($subcategory->name) }}">{!! BaseHelper::clean($subcategory->name) !!}</button>
             @endforeach
