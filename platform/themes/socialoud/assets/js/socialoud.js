@@ -325,7 +325,7 @@ const SocialoudRuntime = {
                 document.title = nextDocument.title;
                 this.updateMeta(nextDocument);
                 if (push) window.history.pushState({}, '', url);
-                window.scrollTo({ top: 0, behavior: 'auto' });
+                this.updateActiveNavigation(url);
                 this.bindPage();
                 const commentListUrl = nextMainElement.querySelector('[data-fob-comment-list-url]')?.dataset.fobCommentListUrl;
                 const csrfToken = nextDocument.querySelector('meta[name="csrf-token"]')?.content;
@@ -357,6 +357,15 @@ const SocialoudRuntime = {
             nextDocument.head.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach((incoming) => {
                 const current = document.head.querySelector(`meta[property="${incoming.getAttribute('property')}"]`) || document.head.querySelector(`meta[name="${incoming.getAttribute('name')}"]`);
                 if (current) current.setAttribute('content', incoming.content);
+            });
+        },
+        updateActiveNavigation(url) {
+            const target = new URL(url, window.location.href);
+            document.querySelectorAll('#socialoud-main-menu > li').forEach((item) => {
+                const link = item.querySelector(':scope > a');
+                const active = link && new URL(link.href, window.location.href).pathname === target.pathname;
+                item.classList.toggle('current', Boolean(active));
+                if (link) link.setAttribute('aria-current', active ? 'page' : 'false');
             });
         },
 
