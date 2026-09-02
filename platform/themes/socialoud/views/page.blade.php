@@ -10,7 +10,6 @@
         ]);
         $heroPosts = $featuredPosts->merge($latestPosts)->unique('id')->take(7);
         $popularPosts = get_popular_posts(8);
-        $quickPost = $latestPosts->first() ?: $heroPosts->first();
     @endphp
 
     <main class="socialoud-container socialoud-home">
@@ -46,13 +45,6 @@
                 </div>
             @endif
         </section>
-        @if ($quickPost)
-            <div class="socialoud-quick-update">
-                <strong>⚡ Quick Update</strong>
-                <span class="socialoud-divider">|</span>
-                <a href="{{ $quickPost->url }}">{!! BaseHelper::clean($quickPost->name) !!} <span aria-hidden="true">›</span></a>
-            </div>
-        @endif
 
 
         @if ($heroPosts->isNotEmpty())

@@ -154,23 +154,6 @@ main { transition: opacity .2s ease, transform .2s ease; }
 
 /* Homepage */
 .socialoud-home { padding-top: 18px; }
-.socialoud-quick-update {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 44px;
-    overflow: hidden;
-    border: 1px solid var(--socialoud-line);
-    border-radius: 8px;
-    padding: 0 14px;
-    background: linear-gradient(180deg, var(--socialoud-panel-2), var(--socialoud-panel));
-    color: var(--socialoud-text);
-    font-size: 12px;
-}
-.socialoud-quick-update strong { color: var(--socialoud-green); white-space: nowrap; }
-.socialoud-divider { color: #5f6666; }
-.socialoud-quick-update a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.socialoud-quick-update a span { color: var(--socialoud-orange); }
 .socialoud-hero-grid { display: grid; grid-template-columns: 1.75fr 1fr; gap: 22px; margin-top: 26px; }
 .socialoud-hero-card { position: relative; min-height: 405px; overflow: hidden; border: 1px solid var(--socialoud-line); border-radius: 8px; background: #111; }
 .socialoud-hero-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, .1), rgba(0, 0, 0, .9) 86%); }
@@ -861,7 +844,6 @@ html.socialoud-light .socialoud-menu > li > ul { border-color: var(--socialoud-l
 html.socialoud-light .socialoud-menu > li > ul a { color: #25292b; }
 html.socialoud-light .socialoud-search-panel { background: #fff; }
 html.socialoud-light .socialoud-search-form input { color: #181b1d; background: #f8f9fa; }
-html.socialoud-light .socialoud-quick-update,
 html.socialoud-light .socialoud-ad-frame,
 html.socialoud-light .socialoud-category-ad { border-color: var(--socialoud-line); background: #fff; color: #25292b; }
 html.socialoud-light .socialoud-side-card { border-color: var(--socialoud-line); background: #fff; }
