@@ -576,7 +576,7 @@ main { transition: opacity .2s ease, transform .2s ease; }
 .socialoud-empty { color: var(--socialoud-muted); }
 
 .socialoud-article-page { padding: 30px 0 54px; }
-.socialoud-article-ad { border: 1px solid var(--socialoud-line); border-radius: 8px; padding: 20px; background: linear-gradient(180deg, #111414, #0e1111); }
+.socialoud-article-ad { width: min(100%, 728px); margin-inline: auto; border: 1px solid var(--socialoud-line); border-radius: 8px; padding: 20px; background: linear-gradient(180deg, #111414, #0e1111); }
 .socialoud-article-ad img, .socialoud-article-ad iframe { max-width: 100%; }
 .socialoud-article-ad.socialoud-ad-frame-has-ads { padding: 0; }
 .socialoud-article-layout { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(300px, .9fr); gap: 26px; margin-top: 30px; }
