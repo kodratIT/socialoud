@@ -192,7 +192,7 @@ main { transition: opacity .2s ease, transform .2s ease; }
 .socialoud-ad-frame img, .socialoud-ad-frame iframe { max-width: 100%; }
 .socialoud-ad-frame-has-ads { padding: 0; }
 .socialoud-ad-slider { position: relative; overflow: hidden; }
-.socialoud-ad-slides { position: relative; aspect-ratio: 3 / 1; overflow: hidden; }
+.socialoud-ad-slides { position: relative; aspect-ratio: 970 / 250; max-height: 250px; overflow: hidden; }
 .socialoud-ad-slides > div {
     position: absolute;
     inset: 0;
@@ -408,7 +408,7 @@ main { transition: opacity .2s ease, transform .2s ease; }
 .socialoud-ad-placeholder span { color: var(--socialoud-orange); font-size: 10px; font-weight: 800; letter-spacing: 1px; }
 .socialoud-ad-placeholder strong { font-size: 26px; }
 .socialoud-ad-placeholder small { color: #c4c9c9; font-size: 12px; }
-.socialoud-ad-placeholder-wide { min-height: 175px; }
+.socialoud-ad-placeholder-wide { min-height: 120px; }
 
 .socialoud-category-page { padding-top: 30px; }
 .socialoud-subcategory-slider {
@@ -808,6 +808,7 @@ main { transition: opacity .2s ease, transform .2s ease; }
     .socialoud-footer-grid { grid-template-columns: 1fr; gap: 24px; }
     .socialoud-ad-slider-control { display: none; }
     .socialoud-ad-slider-dots { bottom: 9px; }
+    .socialoud-ad-slides { aspect-ratio: 320 / 100; max-height: 100px; }
 }
 .socialoud-logo-red { display: none !important; }
 .socialoud-theme-select {

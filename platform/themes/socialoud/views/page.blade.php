@@ -14,6 +14,38 @@
     @endphp
 
     <main class="socialoud-container socialoud-home">
+        @php
+            $topAd = is_plugin_active('ads') ? AdsManager::display('before-featured-posts', [], false) : null;
+            $popupAdItem = is_plugin_active('ads')
+                ? AdsManager::getData(true, true)->where('location', 'header')->sortBy('order')->first()
+                : null;
+            $popupAd = $popupAdItem ? AdsManager::displayAds($popupAdItem->key) : null;
+            $popupAdOrder = $popupAdItem?->order;
+            $popupAdKey = $popupAdItem?->key;
+        @endphp
+        <section class="socialoud-ad-frame @if ($topAd) socialoud-ad-frame-has-ads @endif">
+            @if ($topAd)
+                <div class="socialoud-ad-slider" data-socialoud-ad-slider>
+                    <div class="socialoud-ad-slides">
+                        {!! $topAd !!}
+                    </div>
+                    <div class="socialoud-ad-slider-dots" data-socialoud-ad-dots hidden></div>
+                    <button type="button" class="socialoud-ad-slider-control socialoud-ad-slider-prev" data-socialoud-ad-prev aria-label="Iklan sebelumnya" hidden>
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <button type="button" class="socialoud-ad-slider-control socialoud-ad-slider-next" data-socialoud-ad-next aria-label="Iklan berikutnya" hidden>
+                        <span aria-hidden="true">›</span>
+                    </button>
+                </div>
+            @else
+                <span class="socialoud-ad-label">ADVERTISEMENT</span>
+                <div class="socialoud-ad-placeholder socialoud-ad-placeholder-wide">
+                    <span>ADVERTISEMENT SPACE</span>
+                    <strong>Promote your brand on Socialoud</strong>
+                    <small>Reach readers with a focused editorial placement.</small>
+                </div>
+            @endif
+        </section>
         @if ($quickPost)
             <div class="socialoud-quick-update">
                 <strong>⚡ Quick Update</strong>
@@ -21,6 +53,7 @@
                 <a href="{{ $quickPost->url }}">{!! BaseHelper::clean($quickPost->name) !!} <span aria-hidden="true">›</span></a>
             </div>
         @endif
+
 
         @if ($heroPosts->isNotEmpty())
             <section class="socialoud-hero-grid" aria-label="{{ __('Featured stories') }}">
@@ -69,38 +102,6 @@
             @endif
         @endif
 
-        @php
-            $topAd = is_plugin_active('ads') ? AdsManager::display('before-featured-posts', [], false) : null;
-            $popupAdItem = is_plugin_active('ads')
-                ? AdsManager::getData(true, true)->where('location', 'header')->sortBy('order')->first()
-                : null;
-            $popupAd = $popupAdItem ? AdsManager::displayAds($popupAdItem->key) : null;
-            $popupAdOrder = $popupAdItem?->order;
-            $popupAdKey = $popupAdItem?->key;
-        @endphp
-        <section class="socialoud-ad-frame @if ($topAd) socialoud-ad-frame-has-ads @endif">
-            @if ($topAd)
-                <div class="socialoud-ad-slider" data-socialoud-ad-slider>
-                    <div class="socialoud-ad-slides">
-                        {!! $topAd !!}
-                    </div>
-                    <div class="socialoud-ad-slider-dots" data-socialoud-ad-dots hidden></div>
-                    <button type="button" class="socialoud-ad-slider-control socialoud-ad-slider-prev" data-socialoud-ad-prev aria-label="Iklan sebelumnya" hidden>
-                        <span aria-hidden="true">‹</span>
-                    </button>
-                    <button type="button" class="socialoud-ad-slider-control socialoud-ad-slider-next" data-socialoud-ad-next aria-label="Iklan berikutnya" hidden>
-                        <span aria-hidden="true">›</span>
-                    </button>
-                </div>
-            @else
-                <span class="socialoud-ad-label">ADVERTISEMENT</span>
-                <div class="socialoud-ad-placeholder socialoud-ad-placeholder-wide">
-                    <span>ADVERTISEMENT SPACE</span>
-                    <strong>Promote your brand on Socialoud</strong>
-                    <small>Reach readers with a focused editorial placement.</small>
-                </div>
-            @endif
-        </section>
 
         <section class="socialoud-content-layout" id="terkini">
             <div>
