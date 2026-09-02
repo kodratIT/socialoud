@@ -363,10 +363,6 @@ const SocialoudRuntime = {
             }
         },
 
-        getCoverAdDay() {
-            const now = new Date();
-            return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-        },
 
         updateCoverAdCountdown(coverAd, seconds) {
             const countdown = coverAd.querySelector('[data-socialoud-ad-countdown]');
@@ -377,20 +373,9 @@ const SocialoudRuntime = {
             const coverAd = document.querySelector('[data-socialoud-cover-ad]');
             if (!coverAd) return;
 
-            const order = Number(coverAd.dataset.socialoudPopupOrder);
-            const daily = Number.isFinite(order) && order < 100;
-            const seenKey = `socialoud-cover-ad-seen:${coverAd.dataset.socialoudPopupKey || 'default'}`;
-            try {
-                if (daily && localStorage.getItem(seenKey) === this.getCoverAdDay()) return;
-            } catch (_) {}
 
             const open = () => {
                 if (!coverAd.hidden) return;
-                if (daily) {
-                    try {
-                        localStorage.setItem(seenKey, this.getCoverAdDay());
-                    } catch (_) {}
-                }
                 window.clearTimeout(this.modalTimer);
                 window.clearInterval(this.modalCountdownTimer);
                 coverAd.hidden = false;
