@@ -44,16 +44,28 @@ Theme::registerRoutes(function (): void {
     })->name('socialoud.home.posts');
 
     Route::get('socialoud/category-posts/{category}', function (Category $category) {
+        $selectedCategoryId = request()->integer('category_id', $category->getKey());
         $categoryIds = [$category->getKey()];
+        $selectedCategory = $category;
 
-        if (request()->boolean('all')) {
-            $categoryIds = array_merge($categoryIds, $category->activeChildren->pluck('id')->all());
+        if ($selectedCategoryId !== $category->getKey()) {
+            $descendantIds = Category::getChildrenIds($category->activeChildren);
+            abort_unless(in_array($selectedCategoryId, $descendantIds, true), 404);
+            $selectedCategory = Category::query()->findOrFail($selectedCategoryId);
+            $categoryIds = [$selectedCategoryId];
+        } elseif (request()->boolean('all')) {
+            $categoryIds = Category::getChildrenIds($category->activeChildren, $categoryIds);
         }
 
         $posts = app(PostInterface::class)->getByCategory($categoryIds, 10);
+        $posts->appends(request()->query());
 
         return response()->json([
-            'html' => Theme::partial('category-post-list', compact('posts', 'category')),
+            'html' => Theme::partial('category-post-list', [
+                'posts' => $posts,
+                'category' => $category,
+                'label' => $selectedCategory->name,
+            ]),
             'has_more' => $posts->hasMorePages(),
             'next_url' => $posts->nextPageUrl(),
         ]);

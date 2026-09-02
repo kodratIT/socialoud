@@ -128,7 +128,7 @@ class BlogService
                     );
                 }
 
-                $allRelatedCategoryIds = array_merge([$category->getKey()], $category->activeChildren->pluck('id')->all());
+                $allRelatedCategoryIds = Category::getChildrenIds($category->activeChildren, [$category->getKey()]);
 
                 $posts = app(PostInterface::class)
                     ->getByCategory($allRelatedCategoryIds, (int) theme_option('number_of_posts_in_a_category', 12));

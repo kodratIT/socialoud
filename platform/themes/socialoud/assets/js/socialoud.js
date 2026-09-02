@@ -555,24 +555,33 @@ const SocialoudRuntime = {
             });
 
         },
+        categorySkeleton(count = 4) {
+            return Array.from({ length: count }, () => '<article class="socialoud-news-row socialoud-category-skeleton" aria-hidden="true"><span class="socialoud-skeleton-news-image"></span><div><span class="socialoud-skeleton-news-line"></span><span class="socialoud-skeleton-news-line medium"></span><span class="socialoud-skeleton-news-line short"></span></div><span class="socialoud-skeleton-news-time"></span></article>').join('');
+        },
         async loadCategory(filter) {
             const categoryList = document.querySelector('[data-category-post-list]');
             if (!categoryList || this.categoryLoading) return;
 
             const endpoint = categoryList.dataset.filterEndpoint;
-            const params = new URLSearchParams({ page: '1' });
+            const params = new URLSearchParams({ page: '1', category_id: filter.dataset.categoryId });
             if (filter.dataset.categoryAll === '1') params.set('all', '1');
 
+            const previousHtml = categoryList.innerHTML;
+            const previousFilter = document.querySelector('[data-category-filter].is-active');
             this.categoryLoading = true;
             document.querySelectorAll('[data-category-filter]').forEach((item) => item.classList.toggle('is-active', item === filter));
+            categoryList.innerHTML = this.categorySkeleton();
             categoryList.setAttribute('aria-busy', 'true');
             try {
                 const response = await fetch(`${endpoint}?${params}`, { headers: { Accept: 'application/json' } });
                 if (!response.ok) throw new Error(`Category request failed: ${response.status}`);
                 const data = await response.json();
                 categoryList.innerHTML = data.html;
-                this.updateLoadMore(data);
+                categoryList.dataset.categoryLabel = filter.dataset.categoryLabel;
+                this.updateLoadMore(data, params);
             } catch (error) {
+                categoryList.innerHTML = previousHtml;
+                document.querySelectorAll('[data-category-filter]').forEach((item) => item.classList.toggle('is-active', item === previousFilter));
                 console.error(error);
             } finally {
                 this.categoryLoading = false;
@@ -615,14 +624,17 @@ const SocialoudRuntime = {
 
             this.categoryLoading = true;
             button.disabled = true;
+            categoryList.insertAdjacentHTML('beforeend', this.categorySkeleton(2));
             categoryList.setAttribute('aria-busy', 'true');
             try {
                 const response = await fetch(nextUrl, { headers: { Accept: 'application/json' } });
                 if (!response.ok) throw new Error(`Category request failed: ${response.status}`);
                 const data = await response.json();
+                categoryList.querySelectorAll('.socialoud-category-skeleton').forEach((skeleton) => skeleton.remove());
                 categoryList.insertAdjacentHTML('beforeend', data.html);
                 this.updateLoadMore(data);
             } catch (error) {
+                categoryList.querySelectorAll('.socialoud-category-skeleton').forEach((skeleton) => skeleton.remove());
                 console.error(error);
                 button.disabled = false;
             } finally {
