@@ -74,6 +74,19 @@ const SocialoudRuntime = {
     },
 
     methods: {
+        showNavigationSkeleton(main) {
+            if (!main) return;
+            const skeleton = document.createElement('div');
+            skeleton.className = 'socialoud-navigation-skeleton';
+            skeleton.setAttribute('aria-hidden', 'true');
+            skeleton.innerHTML = '<div class="socialoud-skeleton-heading"></div><div class="socialoud-skeleton-cover"></div><div class="socialoud-skeleton-copy"></div><div class="socialoud-skeleton-copy short"></div><div class="socialoud-skeleton-side"></div>';
+            main.append(skeleton);
+            this.navigationSkeleton = skeleton;
+        },
+        hideNavigationSkeleton() {
+            this.navigationSkeleton?.remove();
+            this.navigationSkeleton = null;
+        },
         bindPage() {
             document.querySelectorAll('source[data-srcset]').forEach((source) => {
                 source.srcset = source.dataset.srcset;
@@ -277,8 +290,10 @@ const SocialoudRuntime = {
         async navigate(url, push = true) {
             if (this.navigationLoading) return;
 
+            const currentMain = document.querySelector('main.socialoud-article-page, main.socialoud-home, main.socialoud-category-page, main.socialoud-default-content');
             this.navigationLoading = true;
             document.documentElement.classList.add('socialoud-navigation-loading');
+            this.showNavigationSkeleton(currentMain);
             try {
                 const response = await fetch(url, {
                     headers: {
@@ -294,7 +309,6 @@ const SocialoudRuntime = {
                 const nextMain = nextDocument.querySelector('main.socialoud-article-page')
                     || nextDocument.querySelector('main.socialoud-home, main.socialoud-category-page')
                     || nextDocument.querySelector('main.socialoud-default-content');
-                const currentMain = document.querySelector('main.socialoud-home, main.socialoud-category-page') || document.querySelector('main.socialoud-default-content');
                 const existingStyles = new Set([...document.querySelectorAll('link[rel="stylesheet"][href]')].map((link) => link.href));
                 nextDocument.querySelectorAll('link[rel="stylesheet"][href]').forEach((link) => {
                     if (!existingStyles.has(link.href)) document.head.appendChild(document.importNode(link, true));
@@ -329,6 +343,7 @@ const SocialoudRuntime = {
             } finally {
                 this.navigationLoading = false;
                 document.documentElement.classList.remove('socialoud-navigation-loading');
+                this.hideNavigationSkeleton();
             }
         },
 

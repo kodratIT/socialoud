@@ -49,25 +49,30 @@ main { transition: opacity .2s ease, transform .2s ease; }
 .socialoud-navigation-loading main {
     position: relative;
     min-height: 520px;
-    opacity: 1;
-    transform: none;
     overflow: hidden;
 }
-.socialoud-navigation-loading main > * { visibility: hidden; }
-.socialoud-navigation-loading main::after {
+.socialoud-navigation-loading main > *:not(.socialoud-navigation-skeleton) { visibility: hidden; }
+.socialoud-navigation-skeleton {
     position: absolute;
+    z-index: 2;
     inset: 0;
-    content: "";
-    background:
-        linear-gradient(#252b2b 0 0) 6% 7% / 30% 24px no-repeat,
-        linear-gradient(#252b2b 0 0) 6% 15% / 88% 180px no-repeat,
-        linear-gradient(#252b2b 0 0) 6% 44% / 88% 18px no-repeat,
-        linear-gradient(#252b2b 0 0) 6% 51% / 78% 18px no-repeat,
-        linear-gradient(#252b2b 0 0) 6% 58% / 84% 18px no-repeat,
-        linear-gradient(110deg, #202626 30%, #303737 45%, #202626 60%);
-    background-size: 30% 24px, 88% 180px, 88% 18px, 78% 18px, 84% 18px, 200% 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(180px, .9fr);
+    grid-template-rows: 28px 180px 18px 18px 18px;
+    gap: 16px 26px;
+    padding: 30px 0 54px;
+}
+.socialoud-navigation-skeleton > div {
+    border-radius: 8px;
+    background: linear-gradient(110deg, #202626 30%, #343c3c 45%, #202626 60%);
+    background-size: 220% 100%;
     animation: socialoud-skeleton-shimmer 1.4s linear infinite;
 }
+.socialoud-skeleton-heading { grid-column: 1 / -1; width: 32%; }
+.socialoud-skeleton-cover { grid-column: 1; grid-row: 2; }
+.socialoud-skeleton-copy { grid-column: 1; grid-row: 3; }
+.socialoud-skeleton-copy.short { grid-row: 4; width: 78%; }
+.socialoud-skeleton-side { grid-column: 2; grid-row: 2 / 6; }
 .socialoud-page-enter { animation: socialoud-page-enter .22s ease both; }
 @keyframes socialoud-skeleton-shimmer {
     from { background-position: 6% 7%, 6% 15%, 6% 44%, 6% 51%, 6% 58%, 100% 0; }
@@ -840,6 +845,13 @@ main { transition: opacity .2s ease, transform .2s ease; }
     .socialoud-ad-slider-control { display: none; }
     .socialoud-ad-slider-dots { bottom: 9px; }
     .socialoud-ad-slides { height: 100px; }
+    .socialoud-navigation-skeleton { grid-template-columns: 1fr; grid-template-rows: 24px 150px 16px 16px 150px; gap: 12px; padding: 22px 0; }
+    .socialoud-skeleton-heading, .socialoud-skeleton-cover, .socialoud-skeleton-copy, .socialoud-skeleton-copy.short, .socialoud-skeleton-side { grid-column: 1; }
+    .socialoud-skeleton-heading { grid-row: 1; }
+    .socialoud-skeleton-cover { grid-row: 2; }
+    .socialoud-skeleton-copy { grid-row: 3; }
+    .socialoud-skeleton-copy.short { grid-row: 4; }
+    .socialoud-skeleton-side { grid-row: 5; }
 }
 .socialoud-logo-red { display: none !important; }
 .socialoud-theme-select {
