@@ -79,7 +79,7 @@ const SocialoudRuntime = {
             const skeleton = document.createElement('div');
             skeleton.className = 'socialoud-navigation-skeleton';
             skeleton.setAttribute('aria-hidden', 'true');
-            skeleton.innerHTML = '<div class="socialoud-skeleton-heading"></div><div class="socialoud-skeleton-cover"></div><div class="socialoud-skeleton-copy"></div><div class="socialoud-skeleton-copy short"></div><div class="socialoud-skeleton-side"></div>';
+            skeleton.innerHTML = '<div class="socialoud-skeleton-heading"></div><div class="socialoud-skeleton-meta"></div><div class="socialoud-skeleton-cover"></div><div class="socialoud-skeleton-copy"></div><div class="socialoud-skeleton-copy short"></div><div class="socialoud-skeleton-copy tiny"></div><div class="socialoud-skeleton-side"><i></i><i></i><i></i></div>';
             main.append(skeleton);
             this.navigationSkeleton = skeleton;
         },
