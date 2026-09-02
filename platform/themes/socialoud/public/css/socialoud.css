@@ -202,12 +202,12 @@ main { transition: opacity .2s ease, transform .2s ease; }
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     transform: translateX(-50%);
 }
 .socialoud-ad-slider-dot {
-    width: 24px;
-    height: 24px;
+    width: 8px;
+    height: 8px;
     border: 1px solid rgba(255, 255, 255, .85);
     border-radius: 50%;
     padding: 0;
@@ -223,7 +223,7 @@ main { transition: opacity .2s ease, transform .2s ease; }
     top: 0;
     bottom: 0;
     z-index: 30;
-    display: flex;
+    display: none !important;
     align-items: center;
     justify-content: center;
     width: 52px;
