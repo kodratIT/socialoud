@@ -14,6 +14,8 @@ services:
         volumes:
             - './storage:/var/www/html/storage'
             - './public/storage:/var/www/html/public/storage'
+        networks:
+            - shared-mysql
         mem_limit: 512m
         cpus: '0.70'
         healthcheck:
@@ -22,3 +24,8 @@ services:
             timeout: 5s
             retries: 5
             start_period: 15s
+
+networks:
+    shared-mysql:
+        external: true
+        name: monitoring-db-phpmyadmin-w2gvm2
