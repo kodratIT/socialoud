@@ -11,9 +11,16 @@ services:
             APP_DEBUG: 'false'
         ports:
             - '127.0.0.1:8082:8082'
+        command:
+            - sh
+            - -c
+            - >-
+              mkdir -p storage/app/public storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs public/storage
+              && chown -R www-data:www-data storage public/storage
+              && exec apache2-foreground
         volumes:
-            - './storage:/var/www/html/storage'
-            - './public/storage:/var/www/html/public/storage'
+            - 'socialoud-storage:/var/www/html/storage'
+            - 'socialoud-public-storage:/var/www/html/public/storage'
         networks:
             - shared-mysql
         mem_limit: 512m
@@ -29,3 +36,9 @@ networks:
     shared-mysql:
         external: true
         name: monitoring-db-phpmyadmin-w2gvm2
+
+volumes:
+    socialoud-storage:
+        name: socialoud-storage
+    socialoud-public-storage:
+        name: socialoud-public-storage
