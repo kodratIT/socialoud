@@ -5,6 +5,8 @@ services:
             dockerfile: docker/production.Dockerfile
             target: app
         image: socialoud/apache:8.4
+        env_file:
+            - .env
         environment:
             APP_DEBUG: 'false'
         ports:
