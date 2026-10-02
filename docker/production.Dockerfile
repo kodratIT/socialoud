@@ -58,10 +58,11 @@ FROM php-base AS app
 
 COPY --from=assets /build/public /var/www/html/public
 COPY docker/php-fpm/php.ini /usr/local/etc/php/conf.d/zz-production.ini
+COPY docker/apache/ports.conf /etc/apache2/ports.conf
 COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN test -d public/vendor \
     && test -d public/themes \
     && chown -R www-data:www-data storage bootstrap/cache
 
-EXPOSE 80
+EXPOSE 8082
 CMD ["apache2-foreground"]
