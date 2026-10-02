@@ -23,8 +23,8 @@ services:
             - 'socialoud-public-storage:/var/www/html/public/storage'
         networks:
             - shared-mysql
-        mem_limit: 512m
-        cpus: '0.70'
+        mem_limit: 1g
+        cpus: '2.0'
         healthcheck:
             test: ['CMD-SHELL', 'php -r "exit(fsockopen(\"127.0.0.1\", 8082) ? 0 : 1);"']
             interval: 10s
