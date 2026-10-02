@@ -1,4 +1,4 @@
-FROM php:8.4-fpm-bookworm AS php-base
+FROM php:8.4-apache-bookworm AS php-base
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/tmp/composer \
@@ -19,6 +19,7 @@ RUN apt-get update \
         unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j2 bcmath curl exif gd intl mbstring mysqli opcache pdo_mysql soap xml zip \
+    && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -57,13 +58,10 @@ FROM php-base AS app
 
 COPY --from=assets /build/public /var/www/html/public
 COPY docker/php-fpm/php.ini /usr/local/etc/php/conf.d/zz-production.ini
-COPY docker/php-fpm/www.conf /usr/local/etc/php-fpm.d/zz-production.conf
+COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN test -d public/vendor \
-    && test -d public/themes
+    && test -d public/themes \
+    && chown -R www-data:www-data storage bootstrap/cache
 
-CMD ["php-fpm", "-F"]
-
-FROM nginx:1.27-alpine AS nginx
-
-COPY docker/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=app /var/www/html/public /var/www/html/public
+EXPOSE 80
+CMD ["apache2-foreground"]
