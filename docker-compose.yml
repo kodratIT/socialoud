@@ -4,85 +4,19 @@ services:
             context: .
             dockerfile: docker/production.Dockerfile
             target: app
-        image: socialoud/php-fpm:8.4
-        env_file:
-            - .env
+        image: socialoud/apache:8.4
         environment:
             APP_DEBUG: 'false'
-        expose:
-            - '9000'
-        command: ['sh', '-c', 'php artisan optimize && exec php-fpm -F']
-        volumes:
-            - './storage:/var/www/html/storage'
-            - './public/storage:/var/www/html/public/storage'
-        networks:
-            - sail
-        depends_on:
-            mysql:
-                condition: service_healthy
-        mem_limit: 448m
-        cpus: '0.55'
-        healthcheck:
-            test: ['CMD-SHELL', 'php-fpm -t >/dev/null 2>&1']
-            interval: 10s
-            timeout: 5s
-            retries: 5
-
-    nginx:
-        build:
-            context: .
-            dockerfile: docker/production.Dockerfile
-            target: nginx
-        image: socialoud/nginx:1.27
         ports:
             - '127.0.0.1:8082:80'
         volumes:
-            - './public/storage:/var/www/html/public/storage:ro'
-        networks:
-            - sail
-        depends_on:
-            laravel.test:
-                condition: service_healthy
-        mem_limit: 64m
-        cpus: '0.15'
+            - './storage:/var/www/html/storage'
+            - './public/storage:/var/www/html/public/storage'
+        mem_limit: 512m
+        cpus: '0.70'
         healthcheck:
-            test: ['CMD-SHELL', 'wget -q -O /dev/null http://127.0.0.1/up']
+            test: ['CMD-SHELL', 'php -r "exit(fsockopen(\"127.0.0.1\", 80) ? 0 : 1);"']
             interval: 10s
             timeout: 5s
             retries: 5
-
-    mysql:
-        image: 'mysql:8.4'
-        ports:
-            - '127.0.0.1:3308:3306'
-        command:
-            - '--performance-schema=OFF'
-            - '--innodb-buffer-pool-size=96M'
-            - '--max-connections=20'
-        environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '%'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
-        volumes:
-            - 'sail-mysql:/var/lib/mysql'
-        networks:
-            - sail
-        mem_limit: 256m
-        cpus: '0.20'
-        healthcheck:
-            test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -uroot -p"$${MYSQL_ROOT_PASSWORD}" --silent']
-            interval: 5s
-            timeout: 5s
-            retries: 20
-            start_period: 20s
-
-networks:
-    sail:
-        driver: bridge
-
-volumes:
-    sail-mysql:
-        driver: local
+            start_period: 15s
